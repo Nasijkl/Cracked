@@ -80,6 +80,20 @@ public class EffectResolutionManager : BaseManager
             }
         }
     }
+
+    public void ResolveEnemyEffects(CharacterObject enemy, EffectTuple.EffectTuple effect)
+    {
+        var targetableEffect = effect.effect as TargetableEffect;
+        if (targetableEffect != null)
+        {
+            var targets = GetTargets(targetableEffect, null, false);
+
+            foreach (var target in targets)
+            {
+                targetableEffect.aResolve(enemy.Character, target.Character, effect.value);
+            }
+        }
+    }
     
 
     private List<CharacterObject> GetTargets(

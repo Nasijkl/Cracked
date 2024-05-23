@@ -11,7 +11,7 @@ namespace UnityEngine.Rendering.Universal
         #else
         internal const int k_DepthBufferBits = 32;
         #endif
-        
+
         const int k_FinalBlitPassQueueOffset = 1;
         const int k_AfterFinalBlitPassQueueOffset = k_FinalBlitPassQueueOffset + 1;
 
@@ -336,7 +336,7 @@ namespace UnityEngine.Rendering.Universal
                 m_DrawOffscreenUIPass.Setup(ref cameraData, k_DepthBufferBits);
                 EnqueuePass(m_DrawOffscreenUIPass);
             }
-            
+
             // TODO: Investigate how to make FXAA work with HDR output.
             bool isFXAAEnabled = cameraData.antialiasing == AntialiasingMode.FastApproximateAntialiasing && !outputToHDR;
 

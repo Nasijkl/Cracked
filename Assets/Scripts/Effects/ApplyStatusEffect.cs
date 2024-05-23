@@ -28,4 +28,10 @@ public class ApplyStatusEffect : IntegerEffect, IEntityEffect
         var currentValue = target.Status.GetValue(Status.Name);
         target.Status.SetValue(Status, currentValue + Value);
     }
+
+    public override void aResolve(RuntimeCharacter source, RuntimeCharacter target, int input_value)
+    {
+        var currentValue = target.Status.GetValue(Status.Name);
+        target.Status.SetValue(Status, currentValue + input_value);
+    }
 }

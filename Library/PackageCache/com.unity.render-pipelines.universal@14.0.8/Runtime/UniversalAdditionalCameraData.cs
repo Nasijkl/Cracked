@@ -746,7 +746,7 @@ namespace UnityEngine.Rendering.Universal
             get => m_ScreenCoordScaleBias;
             set => m_ScreenCoordScaleBias = value;
         }
-        
+
         /// <summary>
         /// Returns true if this camera allows outputting to HDR displays.
         /// </summary>
