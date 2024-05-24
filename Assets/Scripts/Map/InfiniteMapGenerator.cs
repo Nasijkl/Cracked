@@ -6,6 +6,7 @@ public class InfiniteMapGenerator : MonoBehaviour
 {
     public GameObject playerPrefab;
     public GameObject mapTilePrefab;
+    public GameObject newMapTilePrefab; // 新的地图块Prefab
     public int seed;
     public int mapTileSize = 10;
     public int loadRadius = 2; // 减少加载半径，减少生成的地图块数量
@@ -86,7 +87,8 @@ public class InfiniteMapGenerator : MonoBehaviour
 
         if (attempts < 10) // 成功找到有效位置
         {
-            GameObject newTile = Instantiate(mapTilePrefab, newPosition, Quaternion.identity);
+            GameObject selectedPrefab = Random.value > 0.5f ? mapTilePrefab : newMapTilePrefab; // 随机选择一个地图块Prefab
+            GameObject newTile = Instantiate(selectedPrefab, newPosition, Quaternion.identity);
             mapTiles[tilePosition] = newTile;
             StartCoroutine(FadeInFog(newTile));
             explorationValue += 10f; // Adjust as needed
