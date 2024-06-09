@@ -10,7 +10,7 @@ public class CardSelectionBase : BaseManager
 
     public CardDisplayManager cardDisplayManager;
     public EffectResolutionManager effectResolutionManager;
-    public CardDeckManager deckManager;
+    public RuntimeDeckManager deckManager;
     
     protected GameObject selectedCard;
     public IntVariable playerMana;
@@ -24,15 +24,16 @@ public class CardSelectionBase : BaseManager
 
     protected virtual void PlaySelectedCard()
     {
-        var cardObject = selectedCard.GetComponent<CardObject>();
-        var cardTemplate = cardObject.template;
-        playerMana.SetValue(playerMana.Value - cardTemplate.Cost);
+        var cardObject = selectedCard.GetComponent<CrackedCardObject>();
+        var cardData = cardObject.data;
+        //TODO:get cost data
+        //playerMana.SetValue(playerMana.Value - cardData.Cost);
         
         cardDisplayManager.ReOrganizeHandCards(selectedCard);
         
         // 当卡牌打出后，将手中选中的移除
         cardDisplayManager.MoveCardToDiscardPile(selectedCard);
-        deckManager.MoveCardToDiscardPile(cardObject.runtimeCard);
+        deckManager.discardCardsFromHand(cardObject.data);
     }
 }
 

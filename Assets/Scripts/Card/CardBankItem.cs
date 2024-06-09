@@ -6,6 +6,6 @@ using UnityEngine;
 [Serializable]
 public class CardBankItem
 {
-   public CardTemplate Card;
+   public CrackedCardData Card;
    public int Amount;
 }

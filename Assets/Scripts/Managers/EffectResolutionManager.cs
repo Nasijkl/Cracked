@@ -7,8 +7,10 @@ public class EffectResolutionManager : BaseManager
     public CardSelectionHasArrow cardSelectionHasArrow;
     private CharacterObject _currentEnemy;
 
-    public void ResolveCardEffects(RuntimeCard card, CharacterObject playerSelectedTarget)
+    public void ResolveCardEffects(CrackedCardData card, CharacterObject playerSelectedTarget)
     {
+        //TODO: resolve effect
+        /*
         foreach (var effect in card.Template.Effects)
         {
             var targetableEffect = effect as TargetableEffect;
@@ -39,10 +41,13 @@ public class EffectResolutionManager : BaseManager
                 }
             }
         }
+        */
     }
 
-    public void ResolveCardEffects(RuntimeCard card)
+    public void ResolveCardEffects(CrackedCardData card)
     {
+        //TODO
+        /*
         foreach (var effect in card.Template.Effects)
         {
             var targetableEffect = effect as TargetableEffect;
@@ -57,6 +62,7 @@ public class EffectResolutionManager : BaseManager
                 }
             }
         }
+        */
     }
     
     public void SetCurrentEnemy(CharacterObject enemy)

@@ -23,7 +23,8 @@ public class GameDriver : MonoBehaviour
 
     [SerializeField] private CardDisplayManager cardDisplayManager;
 
-    [SerializeField] private CardDeckManager cardDeckManager;
+    //[SerializeField] private CardDeckManager cardDeckManager;
+    [SerializeField] private RuntimeDeckManager cardDeckManager;
     
     [SerializeField]  private EffectResolutionManager effectResolutionManager;
     [SerializeField]  private CardSelectionHasArrow cardSelectionHasArrow;
@@ -32,7 +33,7 @@ public class GameDriver : MonoBehaviour
     [SerializeField] private PlayerManaManager playerManaManager;
     [SerializeField] private CharacterDeathManager characterDeathManager;
     
-    private List<CardTemplate> _playerDeck = new List<CardTemplate>();
+    private List<CrackedCardData> _playerDeck = new List<CrackedCardData>();
 
     [Header("Character pivots")] 
     [SerializeField]
@@ -164,7 +165,7 @@ public class GameDriver : MonoBehaviour
     {
         cardDeckManager.Initialize(deckWidget, discardPileWidget);
         cardDeckManager.LoadDeck(_playerDeck);
-        cardDeckManager.ShuffleDeck();
+        cardDeckManager.shuffleDrawPile();
 
         cardDisplayManager.Initialize(cardManager, deckWidget, discardPileWidget);
         

@@ -5,4 +5,5 @@ using UnityEngine;
 public class RuntimeCard
 {
     public CardTemplate Template;
+    public CrackedCardObject runtime_card;
 }

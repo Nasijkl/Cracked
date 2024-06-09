@@ -85,11 +85,11 @@ public class CardSelectionHasArrow : CardSelectionBase
 
         if (hitInfo.collider != null)
         {
-            var card = hitInfo.collider.GetComponent<CardObject>();
-            var cardTemplate = card.template;
+            var card = hitInfo.collider.GetComponent<CrackedCardObject>();
+            var cardData = card.data;
 
-            if (CardUtils.CardCanBePlayed(cardTemplate, playerMana) && 
-                CardUtils.CardHasTargetableEffect(cardTemplate))
+            if (CardUtils.CardCanBePlayed(cardData, playerMana) && 
+                CardUtils.CardHasTargetableEffect(cardData))
             {
                 selectedCard = hitInfo.collider.gameObject;
                 selectedCard.GetComponent<SortingGroup>().sortingOrder += 10;
@@ -102,7 +102,7 @@ public class CardSelectionHasArrow : CardSelectionBase
     {
         if (selectedCard != null)
         {
-            var card = selectedCard.GetComponent<CardObject>();
+            var card = selectedCard.GetComponent<CrackedCardObject>();
             selectedCard.transform.DOKill();
             card.Reset(() =>
             {
@@ -117,7 +117,7 @@ public class CardSelectionHasArrow : CardSelectionBase
     protected override void PlaySelectedCard()
     {
         base.PlaySelectedCard();
-        var card = selectedCard.GetComponent<CardObject>().runtimeCard;
+        var card = selectedCard.GetComponent<CrackedCardObject>().data;
         effectResolutionManager.ResolveCardEffects(card, _selectedEnemy.GetComponent<CharacterObject>());
     }
     

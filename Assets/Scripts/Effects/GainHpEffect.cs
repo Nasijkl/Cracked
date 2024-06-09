@@ -38,6 +38,6 @@ public class GainHpEffect : IntegerEffect, IEntityEffect
         }
         
         targetHp.SetValue(finalHp);
-        Debug.Log("Gain Hp");
+        //Debug.Log("Gain Hp");
     }
 }

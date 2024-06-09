@@ -43,7 +43,7 @@ public class DealDamageEffect : IntegerEffect, IEntityEffect
             targetShield.SetValue(shield - damage);
         }
         
-        Debug.Log("Deal Damage" + damage);
+        //Debug.Log("Deal Damage" + damage);
 
         // var newHp = hp - damage;
         // if (newHp < 0)
@@ -89,7 +89,7 @@ public class DealDamageEffect : IntegerEffect, IEntityEffect
             targetShield.SetValue(shield - damage);
         }
         
-        Debug.Log("Deal Damage" + damage);
+        //Debug.Log("Deal Damage" + damage);
 
         // var newHp = hp - damage;
         // if (newHp < 0)

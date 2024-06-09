@@ -44,7 +44,7 @@ public class CardDisplayManager : MonoBehaviour
         _sortingOrder = new(SortingOrdersNumber);
     }
 
-    public void CreateHandCards(List<RuntimeCard> cardsInHand, int deckSize)
+    public void CreateHandCards(List<CrackedCardData> cardsInHand, int deckSize)
     {
         var drawnCards = new List<GameObject>(cardsInHand.Count);
 
@@ -60,10 +60,10 @@ public class CardDisplayManager : MonoBehaviour
         PutDeckCardsToHand(drawnCards);
     }
 
-    private GameObject CreateCardGameObject(RuntimeCard card)
+    private GameObject CreateCardGameObject(CrackedCardData card)
     {
         var gameObj = _cardManager.GetObject();
-        var cardObject = gameObj.GetComponent<CardObject>();
+        var cardObject = gameObj.GetComponent<CrackedCardObject>();
         cardObject.SetInfo(card);
 
         gameObj.transform.position = Vector3.zero;
@@ -75,6 +75,10 @@ public class CardDisplayManager : MonoBehaviour
     private void PutDeckCardsToHand(List<GameObject> drawnCards)
     {
         isCardMoving = true;
+
+        Debug.Log("PutDeckCardsToHand");
+        //Debug.Log(_handCards[0].transform.position);
+        //Debug.Log(_handCards[0].transform.GetChild(0).position);
         
         OrganizeHandCards();
 
@@ -90,7 +94,7 @@ public class CardDisplayManager : MonoBehaviour
 
             if (drawnCards.Contains(card))
             {
-                var cardObject = card.GetComponent<CardObject>();
+                var cardObject = card.GetComponent<CrackedCardObject>();
 
                 var seq = DOTween.Sequence();
                 seq.AppendInterval(interval);
@@ -121,6 +125,8 @@ public class CardDisplayManager : MonoBehaviour
             interval += 0.2f;
         }
         
+        //Debug.Log(_handCards[0].transform.position);
+        //Debug.Log(_handCards[0].transform.GetChild(0).position);
         
     }
 
@@ -166,7 +172,7 @@ public class CardDisplayManager : MonoBehaviour
     public void ReOrganizeHandCards(GameObject selectedCard)
     {
         _handCards.Remove(selectedCard);
-        
+        Debug.Log("ReOrganizeHandCards");
         // 卡牌位置的重新调整
         OrganizeHandCards();
         
@@ -178,7 +184,7 @@ public class CardDisplayManager : MonoBehaviour
             card.transform.DOMove(_positions[i], time);
             card.transform.DORotateQuaternion(_rotations[i], time);
             card.GetComponent<SortingGroup>().sortingOrder = _sortingOrder[i];
-            card.GetComponent<CardObject>().SaveTransform(_positions[i], _rotations[i]);
+            card.GetComponent<CrackedCardObject>().SaveTransform(_positions[i], _rotations[i]);
         }
     }
 
