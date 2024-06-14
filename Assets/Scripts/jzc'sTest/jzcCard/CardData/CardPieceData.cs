@@ -8,11 +8,4 @@ public class CardPieceData : ScriptableObject
 {
     public Sprite sprite;
 
-    public CardPieceData DeepCopy()
-    {
-        CardPieceData copiedPiece = ScriptableObject.CreateInstance<CardPieceData>();
-        copiedPiece.sprite = sprite;
-
-        return copiedPiece;
-    }
 }
