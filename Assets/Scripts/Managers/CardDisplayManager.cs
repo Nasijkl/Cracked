@@ -60,6 +60,20 @@ public class CardDisplayManager : MonoBehaviour
         PutDeckCardsToHand(drawnCards);
     }
 
+    public void CreateHandCards(List<CrackedCardData> cardsInHand)
+    {
+        var drawnCards = new List<GameObject>(cardsInHand.Count);
+
+        foreach (var card in cardsInHand)
+        {
+            var cardGameObject = CreateCardGameObject(card);
+            _handCards.Add(cardGameObject);
+            drawnCards.Add(cardGameObject);
+        }
+        
+        PutDeckCardsToHand(drawnCards);
+    }
+
     private GameObject CreateCardGameObject(CrackedCardData card)
     {
         var gameObj = _cardManager.GetObject();
@@ -75,10 +89,6 @@ public class CardDisplayManager : MonoBehaviour
     private void PutDeckCardsToHand(List<GameObject> drawnCards)
     {
         isCardMoving = true;
-
-        Debug.Log("PutDeckCardsToHand");
-        //Debug.Log(_handCards[0].transform.position);
-        //Debug.Log(_handCards[0].transform.GetChild(0).position);
         
         OrganizeHandCards();
 
@@ -172,7 +182,23 @@ public class CardDisplayManager : MonoBehaviour
     public void ReOrganizeHandCards(GameObject selectedCard)
     {
         _handCards.Remove(selectedCard);
-        Debug.Log("ReOrganizeHandCards");
+        // 卡牌位置的重新调整
+        OrganizeHandCards();
+        
+        // 以动画的方式动态调整卡牌图形        
+        for (var i = 0; i < _handCards.Count; i++)
+        {
+            var card = _handCards[i];
+            const float time = 0.3f;
+            card.transform.DOMove(_positions[i], time);
+            card.transform.DORotateQuaternion(_rotations[i], time);
+            card.GetComponent<SortingGroup>().sortingOrder = _sortingOrder[i];
+            card.GetComponent<CrackedCardObject>().SaveTransform(_positions[i], _rotations[i]);
+        }
+    }
+
+    public void ReOrganizeHandCards()
+    {
         // 卡牌位置的重新调整
         OrganizeHandCards();
         
@@ -213,6 +239,25 @@ public class CardDisplayManager : MonoBehaviour
         {
             _discardPileWidget.AddCard();
             _handCards.Remove(gameObj);
+        });
+    }
+
+    public void DistroyCardInHand(GameObject gameObj)
+    {
+        //TODO: handle card in runtime deck manager
+        _handCards.Remove(gameObj);
+        var sequence = DOTween.Sequence();
+        sequence.AppendCallback(() =>
+        {
+            gameObj.transform.DOScale(Vector3.zero, CardToDiscardPileAnimationTime).OnComplete(() =>
+            {
+                gameObj.GetComponent<CardManager.ManagedPoolObject>().cardManager.ReturnObject(gameObj);
+            });
+        });
+        sequence.AppendCallback(() =>
+        {
+            //_handCards.Remove(gameObj);
+            ReOrganizeHandCards();
         });
     }
 

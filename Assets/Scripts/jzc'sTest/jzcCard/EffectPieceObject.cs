@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EffectPieceObject : CardPieceObject
 {
-    public List<CardEvent> event_list;
+    public List<CardEvent> event_list = new List<CardEvent>();
 
     public override int pieceType(){
         return 5;

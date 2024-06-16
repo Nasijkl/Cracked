@@ -12,7 +12,7 @@ public class EnemyAI
    public int RepeatIndex;
    
 
-   public List<Effect> Effects;
+   public List<Effect> Effects = new List<Effect>();
 
    public EffectTuple.EffectTuple selected_effect;
 

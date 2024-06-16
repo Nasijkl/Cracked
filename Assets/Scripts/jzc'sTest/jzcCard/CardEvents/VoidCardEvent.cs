@@ -5,8 +5,8 @@ using UnityEngine;
 
 [Serializable]
 [CreateAssetMenu(
-    menuName = "CardGame/Card Effect/Void Effect",
-    fileName = "VoidEffect",
+    menuName = "CardGame/Card Event/Void Event",
+    fileName = "VoidEvent",
     order = 0)]
 public class VoidCardEvent : CardEvent
 {

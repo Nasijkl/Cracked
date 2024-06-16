@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class RuntimeDeckManager : MonoBehaviour
 {
+    [SerializeField]
+    public List<CrackedCardData> card_dict;
+
     private List<CrackedCardData> draw_pile;
     private List<CrackedCardData> discard_pile;
     private List<CrackedCardData> hand_cards;
@@ -101,6 +104,16 @@ public class RuntimeDeckManager : MonoBehaviour
         discard_pile.AddRange(hand_cards);
         hand_cards.Clear();
         return;
+    }
+
+    public void AddCardToHand(CrackedCardData card)
+    {
+        hand_cards.Add(card);
+    }
+
+    public void DestroyCardFromHand(CrackedCardData card)
+    {
+        hand_cards.Remove(card);
     }
 
     public void shuffleDrawPile()

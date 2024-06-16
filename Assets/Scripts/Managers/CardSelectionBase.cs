@@ -26,8 +26,18 @@ public class CardSelectionBase : BaseManager
     {
         var cardObject = selectedCard.GetComponent<CrackedCardObject>();
         var cardData = cardObject.data;
-        //TODO:get cost data
-        //playerMana.SetValue(playerMana.Value - cardData.Cost);
+        int cost = 0;
+        CostPieceData piece = cardData.card_pieces[0] as CostPieceData;
+        if(piece != null)
+        {
+            cost += piece.cost;
+        }
+        piece = cardData.card_pieces[1] as CostPieceData;
+        if(piece != null)
+        {
+            cost += piece.cost;
+        }
+        playerMana.SetValue(playerMana.Value - cost);
         
         cardDisplayManager.ReOrganizeHandCards(selectedCard);
         

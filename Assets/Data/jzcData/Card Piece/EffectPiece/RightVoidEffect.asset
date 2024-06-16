@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 357a2d819a2145a429959cdddf013571, type: 3}
   m_Name: RightVoidEffect
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: b97ea52a0bfcde547bcc7c6f1be6b4c4, type: 3}
+  sprite: {fileID: 21300000, guid: aa48fa6cdc0fbfc45a77574a646434bc, type: 3}
   events:
-  - card_event: {fileID: 11400000, guid: b0dd767ec9cb6ba4fa54bd6518e42e71, type: 2}
+  - card_event: {fileID: 11400000, guid: 709964e7032572044bbdf452ed8b5a2c, type: 2}
     value: 0

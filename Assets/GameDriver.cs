@@ -27,7 +27,9 @@ public class GameDriver : MonoBehaviour
     [SerializeField] private RuntimeDeckManager cardDeckManager;
     
     [SerializeField]  private EffectResolutionManager effectResolutionManager;
-    [SerializeField]  private CardSelectionHasArrow cardSelectionHasArrow;
+    //[SerializeField]  private CardSelectionHasArrow cardSelectionHasArrow;
+    [SerializeField]  private CrackedCardPlayManager crackedCardPlayManager;
+
     [SerializeField] private TurnManager turnManager;
     [SerializeField] private EnemyAIManager enemyAIManager;
     [SerializeField] private PlayerManaManager playerManaManager;
@@ -179,9 +181,10 @@ public class GameDriver : MonoBehaviour
             enemyCharacters.Add(enemy.GetComponent<CharacterObject>());
         }
         
-        cardSelectionHasArrow.Initialize(playerCharacter, enemyCharacters);
+        //cardSelectionHasArrow.Initialize(playerCharacter, enemyCharacters);
+        crackedCardPlayManager.Initialize(playerCharacter, enemyCharacters);
         enemyAIManager.Initialize(playerCharacter, enemyCharacters);
-        effectResolutionManager.Initialize(playerCharacter, enemyCharacters);
+        effectResolutionManager.Initialize(playerCharacter, enemyCharacters, cardDeckManager);
         characterDeathManager.Initialize(playerCharacter, enemyCharacters);
         
         turnManager.BeginGame();

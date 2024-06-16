@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class GlobalDeckManager : MonoBehaviour
 {
-    public List<CrackedCardData> card_deck;
+    public List<CrackedCardData> card_deck = new List<CrackedCardData>();
+
+    
 
     public void addCard(CrackedCardData card){
         card_deck.Add(card);

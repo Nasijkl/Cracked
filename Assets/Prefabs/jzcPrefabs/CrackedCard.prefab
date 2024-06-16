@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8650189844755666846}
   - component: {fileID: 4805694695990882489}
   - component: {fileID: 8380024241031791910}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CrackedCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}

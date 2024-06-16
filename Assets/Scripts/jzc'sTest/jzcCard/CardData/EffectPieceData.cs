@@ -10,5 +10,5 @@ using UnityEngine;
     order = 3)]
 public class EffectPieceData : CardPieceData
 {
-    public List<CardEventTuple> events;
+    public List<CardEventTuple> events = new List<CardEventTuple>();
 }

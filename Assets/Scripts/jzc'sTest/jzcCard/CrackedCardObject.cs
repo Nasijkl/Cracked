@@ -65,20 +65,14 @@ public class CrackedCardObject : MonoBehaviour
     public void SetInfo(CrackedCardData card)
     {
         data = card;
-        //Debug.Log("set cracked card info");
         for(int i = 0; i < 4; i++)
         {
-            //Debug.Log("piece_"+i);
-            //Debug.Log(data.card_pieces[i]);
             if(data.card_pieces[i]!=null)
             {
                 GameObject child_object = new GameObject("card_piece_" + i);
-                Debug.Log(child_object.transform.position);
                 child_object.transform.parent = transform;
-                Debug.Log(child_object.transform.position);
                 child_object.transform.localPosition = new Vector3(0.16f,0.05f,0);
                 child_object.transform.localScale = Vector3.one;
-                Debug.Log("setinfo");
                 
                 CardPieceObject piece;
                 if(data.card_pieces[i] is CostPieceData)
@@ -122,15 +116,9 @@ public class CrackedCardObject : MonoBehaviour
 
         Transform childObject = transform.GetChild(0) ;
         // 在这里对每个子对象进行操作
-        Debug.Log("Child Object: {childObject.name}");
-        Debug.Log(childObject.position);
-
-        //Debug.Log(child_object.transform.position);
         transform.DOMove(_savedPosition, 0.2f);
         transform.DORotateQuaternion(_savedRotation, 0.2f);
         _sortingGroup.sortingOrder = _savedSortingOrder;
-
-        Debug.Log(childObject.position);
 
         onComplete();
     }

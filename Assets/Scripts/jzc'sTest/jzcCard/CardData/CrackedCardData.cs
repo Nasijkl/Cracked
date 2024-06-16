@@ -6,4 +6,18 @@ using UnityEngine;
 public class CrackedCardData : ScriptableObject
 {
     public CardPieceData[] card_pieces = new CardPieceData[4];
+
+    public CrackedCardData(List<CardPieceData> card)
+    {
+        for(int i = 0; i < 4; i++)
+        {
+            card_pieces[i] = card[i];
+        }
+        return;
+    }
+
+    public CrackedCardData deepCopy()
+    {
+        return this;
+    }
 }
