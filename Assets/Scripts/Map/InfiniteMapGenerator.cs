@@ -5,12 +5,12 @@ using UnityEngine;
 public class InfiniteMapGenerator : MonoBehaviour
 {
     public GameObject playerPrefab;
-    public GameObject mapTilePrefab;
-    public GameObject newMapTilePrefab; // 新的地图块Prefab
+    public GameObject[] mapTilePrefabs; // an array to store all the mapTilePrefabs
+    //public GameObject newMapTilePrefab; // 新的地图块Prefab
     public int seed;
     public int mapTileSize = 10;
     public int loadRadius = 2; // 减少加载半径，减少生成的地图块数量
-    public float minDistanceBetweenTiles = 50f; // 增加地图块之间的最小距离
+    public float minDistanceBetweenTiles = 30f; // 增加地图块之间的最小距离
     public float maxRandomOffset = 10f; // 增加随机偏移的最大值
     public float fadeDuration = 1f; // 淡入效果持续时间
     public float stamina = 100f;
@@ -88,6 +88,9 @@ public class InfiniteMapGenerator : MonoBehaviour
         if (attempts < 10) // 成功找到有效位置
         {
             GameObject selectedPrefab = Random.value > 0.5f ? mapTilePrefab : newMapTilePrefab; // 随机选择一个地图块Prefab
+            //GameObject selectedPrefab = Random.value > 0.5f ? mapTilePrefab : newMapTilePrefab; // 随机选择一个地图块Prefab
+            int randomIndex = Random.Range(0, mapTilePrefabs.Length); // generate a random index
+            GameObject selectedPrefab = mapTilePrefabs[randomIndex]; // select a prefab from the array
             GameObject newTile = Instantiate(selectedPrefab, newPosition, Quaternion.identity);
             mapTiles[tilePosition] = newTile;
             StartCoroutine(FadeInFog(newTile));
