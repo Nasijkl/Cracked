@@ -5,13 +5,10 @@ using UnityEngine;
 public class FogGenerator : MonoBehaviour
 {
     public GameObject fogTilePrefab; // 迷雾地块的Prefab
-    //public int fogTileCount = 10000; // 迷雾地块数量
-    //public float fogSpawnRadius = 1f; // 迷雾地块生成的半径
-    //public float fogDisappearDelay = 0.1f; // 碰撞后迷雾地块消失的延迟时间
-
     private List<GameObject> fogTiles; // 迷雾地块列表
     public float maxOffset = 0.5f;
     public int exclusionRange = 20;
+    public float fogDisappearDuration = 1.0f; // 渐变消失的持续时间
 
     private void Start()
     {
@@ -31,31 +28,42 @@ public class FogGenerator : MonoBehaviour
                 float offsetY = Random.Range(-maxOffset, maxOffset);
                 position += new Vector2(offsetX, offsetY);
                 GameObject fogTile = Instantiate(fogTilePrefab, position, Quaternion.identity);
+                fogTile.tag = "Fog"; // 确保迷雾地块的标签设置为 "Fog"
                 fogTiles.Add(fogTile);
             }
         }
     }
-    /*private void OnTriggerEnter2D(Collider2D other)
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Fog"))
         {
             // 获取碰撞到的迷雾地块
-            GameObject collidedFogTile = gameObject.transform.parent.gameObject;
-            if (collidedFogTile.CompareTag("Fog"))
-            {
-                // 等待一定的延迟时间
-                StartCoroutine(DisappearFogTile(collidedFogTile));
-            }
+            GameObject collidedFogTile = other.gameObject;
+
+            // 开始渐变消失协程
+            StartCoroutine(FadeOutFogTile(collidedFogTile));
         }
     }
 
-    private IEnumerator DisappearFogTile(GameObject fogTile)
+    private IEnumerator FadeOutFogTile(GameObject fogTile)
     {
-        // 等待一定的延迟时间
-        yield return new WaitForSeconds(fogDisappearDelay);
+        SpriteRenderer spriteRenderer = fogTile.GetComponent<SpriteRenderer>();
+        if (spriteRenderer != null)
+        {
+            Color originalColor = spriteRenderer.color;
+            float elapsedTime = 0f;
 
-        // 销毁迷雾地块
-        Destroy(fogTile);
-    }*/
+            while (elapsedTime < fogDisappearDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                float alpha = Mathf.Lerp(1f, 0f, elapsedTime / fogDisappearDuration);
+                spriteRenderer.color = new Color(originalColor.r, originalColor.g, originalColor.b, alpha);
+                yield return null;
+            }
 
+            // 完全透明后销毁迷雾地块
+            Destroy(fogTile);
+        }
+    }
 }

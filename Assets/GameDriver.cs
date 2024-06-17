@@ -31,8 +31,7 @@ public class GameDriver : MonoBehaviour
     [SerializeField] private EnemyAIManager enemyAIManager;
     [SerializeField] private PlayerManaManager playerManaManager;
     [SerializeField] private CharacterDeathManager characterDeathManager;
-    [SerializeField] private CrackedCardData crackedCardData;
-
+    
     private List<CardTemplate> _playerDeck = new List<CardTemplate>();
 
     [Header("Character pivots")] 

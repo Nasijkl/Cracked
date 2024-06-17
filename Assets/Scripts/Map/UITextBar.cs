@@ -2,13 +2,11 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-
 public class UIManager : MonoBehaviour
 {
     public TextMeshProUGUI staminaText;
     public TextMeshProUGUI explorationText;
     public TextMeshProUGUI healthText;
-
     public Slider staminaSlider;
     public Slider explorationSlider;
     public Slider healthSlider;
@@ -34,7 +32,6 @@ public class UIManager : MonoBehaviour
             staminaText.text = "Stamina: " + mapGenerator.stamina.ToString("F1");
             explorationText.text = "Exploration: " + mapGenerator.explorationValue.ToString("F1");
             healthText.text = "Health: " + playerHealth.currentHealth.ToString("F1");
-
             staminaSlider.value = mapGenerator.stamina;
             explorationSlider.value = mapGenerator.explorationValue;
             healthSlider.value = playerHealth.currentHealth;

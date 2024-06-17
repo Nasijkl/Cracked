@@ -5,6 +5,7 @@ using UnityEngine;
 public class InfiniteMapGenerator : MonoBehaviour
 {
     public GameObject playerPrefab;
+    //public GameObject mapTilePrefab;
     public GameObject[] mapTilePrefabs; // an array to store all the mapTilePrefabs
     //public GameObject newMapTilePrefab; // 新的地图块Prefab
     public int seed;
@@ -87,7 +88,6 @@ public class InfiniteMapGenerator : MonoBehaviour
 
         if (attempts < 10) // 成功找到有效位置
         {
-            GameObject selectedPrefab = Random.value > 0.5f ? mapTilePrefab : newMapTilePrefab; // 随机选择一个地图块Prefab
             //GameObject selectedPrefab = Random.value > 0.5f ? mapTilePrefab : newMapTilePrefab; // 随机选择一个地图块Prefab
             int randomIndex = Random.Range(0, mapTilePrefabs.Length); // generate a random index
             GameObject selectedPrefab = mapTilePrefabs[randomIndex]; // select a prefab from the array

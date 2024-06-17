@@ -8,8 +8,6 @@ public class PlayerMovement : MonoBehaviour
     public float swaySpeed = 5f;    // 摇摆的速度
     public Transform spriteTransform; // 用于引用玩家的SpriteTransform
 
-
-    private Vector3 originalSpritePosition;
     public float minX = -200f; // 移动边界的最小X位置
     public float maxX = 200f; // 移动边界的最大X位置
     public float minY = -200f; // 移动边界的最小Y位置
@@ -18,6 +16,8 @@ public class PlayerMovement : MonoBehaviour
     private float elapsedTime; // 已经经过的时间
 
     private Vector3 originalSpritePosition;
+
+
 
 
     private void Start()
@@ -32,27 +32,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        float moveX = Input.GetAxis("Horizontal");
-        float moveY = Input.GetAxis("Vertical");
-
-        Vector3 move = new Vector3(moveX, moveY, 0);
-        transform.Translate(move * moveSpeed * Time.deltaTime);
-
-        isMoving = move.magnitude > 0;
-
-        if (isMoving)
-        {
-            // 添加左右摇摆效果
-            float sway = Mathf.Sin(Time.time * swaySpeed) * swayAmount;
-            spriteTransform.localPosition = originalSpritePosition + new Vector3(sway, 0, 0);
-        }
-        else
-        {
-            // 如果玩家没有移动，则恢复原始位置
-            spriteTransform.localPosition = originalSpritePosition;
-        }
-    }
-}
         if (Input.GetMouseButtonDown(0))
         {
             // 鼠标左键被按下
@@ -103,4 +82,3 @@ public class PlayerMovement : MonoBehaviour
 
     }
 }
-

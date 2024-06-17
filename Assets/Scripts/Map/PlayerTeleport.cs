@@ -1,10 +1,3 @@
-
-using UnityEngine;
-using UnityEngine.SceneManagement; // 用于场景切换
-
-public class PlayerTeleport : MonoBehaviour
-{
-
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -30,23 +23,10 @@ public class PlayerTeleport : MonoBehaviour
         playerMovement = GetComponent<PlayerMovement>();
         
     }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("MapTile"))
         {
-
-            MaTile mapTile = other.GetComponent<MaTile>();
-            if (mapTile != null)
-            {
-                string targetScene = mapTile.targetScene;
-                // 切换到目标关卡
-                SceneManager.LoadScene(targetScene);
-            }
-        }
-    }
-}
-
             MaTile mapTile = other.GetComponent<MaTile>();
             PlayerMovement playerMovement = GetComponent<PlayerMovement>();
             if (mapTile != null)
@@ -89,4 +69,3 @@ SceneManager.LoadScene(targetScene);
 }
 }
 }*/
-
