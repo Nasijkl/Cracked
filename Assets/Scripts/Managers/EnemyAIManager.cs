@@ -19,7 +19,7 @@ public class EnemyAIManager : BaseManager
     private const float ThinkingTime = 1.5f;
 
 
-    public override void Initialize(CharacterObject player, List<CharacterObject> enemies)
+    public override void Initialize(CharacterObject player, List<CharacterObject> enemies, RuntimeDeckManager deck)
     {
         base.Initialize(player, enemies);
         brains = new List<EnemyAI>(enemies.Count);
@@ -41,6 +41,69 @@ public class EnemyAIManager : BaseManager
 
             if (template != null)
             {
+                
+
+                //added by jzc
+
+                var adaptivePattern = template.adaptivePattern as AdaptivePattern;
+                int selected_effect = 0;
+                if (adaptivePattern != null){
+
+                    if(brain.PatternIndex >= adaptivePattern.Patterns.Count){
+                        brain.PatternIndex = 0;
+                        brain.EffectIndex = 0;
+                    }
+
+                    // 解析逻辑比较简单，请不要设计嵌套的循环和随机行为，但是循环的随机行为是可行的 --jzc
+                    var status = adaptivePattern.Patterns[brain.PatternIndex];
+                    var loop_flag = 1;
+                    var random_flag = 0;
+                    
+
+                    var random_pool = new List<int>();
+                    while (brain.PatternIndex < adaptivePattern.Patterns.Count && loop_flag == 1){
+                        if (status == PatternStatus.RandomHead){
+                            random_flag = 1;
+                        }
+                        else if (status == PatternStatus.RandomEnd){
+                            loop_flag = 0;
+                            var randomIndex = Random.Range(0, random_pool.Count - 1);
+                            selected_effect = random_pool[randomIndex];
+                        }
+                        else if (status == PatternStatus.RepeatHead){
+                            brain.RepeatFlag = brain.PatternIndex + 1;
+                            brain.RepeatIndex = brain.EffectIndex + 1;
+                        }
+                        else if (status == PatternStatus.RepeatEnd){
+                            brain.PatternIndex = brain.RepeatFlag;
+                            brain.EffectIndex = brain.RepeatIndex;
+                        }
+                        else {  // status == Effect
+                            if(random_flag == 0){
+                                selected_effect = brain.EffectIndex;
+                                loop_flag = 0;
+                            }
+                            else{
+                                random_pool.Add(brain.EffectIndex);
+                            }
+                            brain.EffectIndex += 1;
+                        }
+                        brain.PatternIndex += 1;
+                        status = adaptivePattern.Patterns[brain.PatternIndex];
+                    }
+                }
+
+
+                var acurrentEffect = (EffectTuple.EffectTuple)adaptivePattern.Effects[selected_effect];
+                brain.selected_effect = acurrentEffect;
+                var asprite = acurrentEffect.effect.sprite;
+                intentChangeEvents[enemyIndex].Raise(asprite, acurrentEffect.value);
+
+
+                continue;
+                
+                //add ended
+
                 if (brain.PatternIndex >= template.Patterns.Count)
                 {
                     brain.PatternIndex = 0;
@@ -115,7 +178,9 @@ public class EnemyAIManager : BaseManager
         foreach (var brain  in brains)
         {
             effectResolutionManager.SetCurrentEnemy(brain.Enemy);
-            effectResolutionManager.ResolveEnemyEffects(brain.Enemy, brain.Effects);
+            //effectResolutionManager.ResolveEnemyEffects(brain.Enemy, brain.Effects);
+
+            effectResolutionManager.ResolveEnemyEffects(brain.Enemy, brain.selected_effect);
             yield return new WaitForSeconds(ThinkingTime);
         }
     }

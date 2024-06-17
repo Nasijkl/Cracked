@@ -20,4 +20,10 @@ public class GainShieldEffect : IntegerEffect, IEntityEffect
         var targetShield = target.Shield;
         targetShield.SetValue(targetShield.Value + Value);
     }
+
+    public override void aResolve(RuntimeCharacter source, RuntimeCharacter target, int input_value)
+    {
+        var targetShield = target.Shield;
+        targetShield.SetValue(targetShield.Value + input_value);
+    }
 }

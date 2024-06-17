@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1323a628eab83143ba4557f2d24e47b, type: 3}
+  m_Name: PinkSticky
+  m_EditorClassIdentifier: 
+  Name: PinkSticky
+  Prefab: {fileID: 6441796025504901836, guid: 208c8c61963dc8f4d93a40a6e2482001, type: 3}
+  Patterns:
+  - {fileID: 11400000, guid: c93a6ea173979554095903095ce83b9c, type: 2}
+  - {fileID: 0}
+  adaptivePattern: {fileID: 11400000, guid: 4581e0af9315cf94e8f148e2e287a460, type: 2}

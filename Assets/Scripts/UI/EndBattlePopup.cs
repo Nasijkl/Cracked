@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
+using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement; // 引入场景管理命名空间
 using UnityEngine.UI;
 
 public class EndBattlePopup : MonoBehaviour
@@ -41,7 +41,7 @@ public class EndBattlePopup : MonoBehaviour
         titleText.text = VictoryText;
         descriptionText.text = string.Empty;
     }
-
+    
     public void SetDefeatText()
     {
         titleText.text = DefeatText;
@@ -50,7 +50,8 @@ public class EndBattlePopup : MonoBehaviour
 
     public void OnEndOfGameButtonPressed()
     {
-        // 传送到地图场景
-        SceneManager.LoadScene("Map"); // 替换 "MapSceneName" 为地图场景的名称
+        EditorApplication.isPlaying = false;
     }
+    
+    
 }

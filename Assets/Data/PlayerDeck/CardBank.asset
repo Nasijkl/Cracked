@@ -14,9 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: PlayerDeck
   Items:
-  - Card: {fileID: 11400000, guid: adc461d04c2aa9148951b6690b357f61, type: 2}
+  - Card: {fileID: 11400000, guid: 3375749e4c8d52d43b302adb2aef4323, type: 2}
     Amount: 3
-  - Card: {fileID: 11400000, guid: 140f8eb8d69c1b24abaa0e60e8c709dc, type: 2}
+  - Card: {fileID: 11400000, guid: d4dc03f2a28b33c4ba7adf199c3857f1, type: 2}
     Amount: 3
-  - Card: {fileID: 11400000, guid: 34922ec8f6b280e4dbb9d5da47b13d72, type: 2}
-    Amount: 2
+  - Card: {fileID: 11400000, guid: 6cd6c621db994ae4cbaa856d18a3a44e, type: 2}
+    Amount: 3
+  - Card: {fileID: 11400000, guid: 833e76e70e41ade499c1fb35e16e511a, type: 2}
+    Amount: 3
