@@ -27,6 +27,36 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1562f0646ad96b9428dfb4edcf56bc0f
+    m_Address: Assets/Scripts/jzc'sTest/jzcPattern/PinkSticky.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 208c8c61963dc8f4d93a40a6e2482001
+    m_Address: Assets/Prefabs/pink_sticky_0.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e6ba108c263dc464291501993331cb76
+    m_Address: CardBank
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3661e29ed62f499488cd008d27486031
+    m_Address: test1
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 622527d2784260d4b8ec20e07b677b5e
+    m_Address: LeftVoidEffect
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c4bde1700d62eb84c86787e818f2af46
+    m_Address: RightVoidEffect
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: afc27d4c70f11bf4f838a39b673a4e8f, type: 2}
   m_SchemaSet:

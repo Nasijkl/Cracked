@@ -11,4 +11,5 @@ using UnityEngine;
 public class EnemyTemplate : CharacterTemplate
 {
     public List<Pattern> Patterns = new List<Pattern>();
+    public AdaptivePattern adaptivePattern;
 }

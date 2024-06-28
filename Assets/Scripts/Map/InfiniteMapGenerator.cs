@@ -89,8 +89,19 @@ public class InfiniteMapGenerator : MonoBehaviour
         if (attempts < 10) // 成功找到有效位置
         {
             //GameObject selectedPrefab = Random.value > 0.5f ? mapTilePrefab : newMapTilePrefab; // 随机选择一个地图块Prefab
-            int randomIndex = Random.Range(0, mapTilePrefabs.Length); // generate a random index
-            GameObject selectedPrefab = mapTilePrefabs[randomIndex]; // select a prefab from the array
+            // 生成一个0到100的随机数，用于决定是否选择最后一个Prefab
+            float chance = Random.Range(0f, 100f);
+            GameObject selectedPrefab;
+
+            if (chance < 2f) // 有2%的概率选择最后一个Prefab
+            {
+                selectedPrefab = mapTilePrefabs[mapTilePrefabs.Length - 1];
+            }
+            else // 其他情况下，从前面的Prefab中随机选择
+            {
+                int randomIndex = Random.Range(0, mapTilePrefabs.Length - 1); // 从前面的元素中随机选择
+                selectedPrefab = mapTilePrefabs[randomIndex];
+            }
             GameObject newTile = Instantiate(selectedPrefab, newPosition, Quaternion.identity);
             mapTiles[tilePosition] = newTile;
             StartCoroutine(FadeInFog(newTile));
@@ -150,7 +161,18 @@ public class InfiniteMapGenerator : MonoBehaviour
 
     void HandleStamina()
     {
-        if (playerMovement.isMoving)
+        bool flag = playerMovement.isMoving;
+
+        // 假设Dialog是Canvas的名称，首先需要获取到这个Canvas对象
+        Canvas dialogCanvas = GameObject.Find("Dialog").GetComponent<Canvas>();
+
+        // 检查Dialog Canvas是否激活
+        if (dialogCanvas != null && dialogCanvas.enabled)
+        {
+            flag = false;
+        }
+
+        if (flag)
         {
             stamina -= staminaConsumptionRate * Time.deltaTime;
             if (stamina <= 0)
@@ -159,6 +181,16 @@ public class InfiniteMapGenerator : MonoBehaviour
                 playerHealth.TakeDamage(fatigueDamageRate * Time.deltaTime);
             }
         }
+        /*
+        if (playerMovement.isMoving)
+        {
+            stamina -= staminaConsumptionRate * Time.deltaTime;
+            if (stamina <= 0)
+            {
+                stamina = 0;
+                playerHealth.TakeDamage(fatigueDamageRate * Time.deltaTime);
+            }
+        }*/
     }
 
     void TriggerBossBattle()

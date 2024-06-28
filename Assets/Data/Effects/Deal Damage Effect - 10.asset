@@ -17,5 +17,6 @@ MonoBehaviour:
   TargetActions:
   - Group: {fileID: 11400000, guid: 01e4415b58385bb48b2c19396cbc0aad, type: 2}
   - Group: {fileID: 11400000, guid: 3965234da9f0f544d9f787ad7584cc2a, type: 2}
+  sprite: {fileID: 21300000, guid: c758bb61eb38b4f748fea98ac8d6fcba, type: 3}
   Target: 1
   Value: 10

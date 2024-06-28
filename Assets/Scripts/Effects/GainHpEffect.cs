@@ -24,6 +24,19 @@ public class GainHpEffect : IntegerEffect, IEntityEffect
         }
         
         targetHp.SetValue(finalHp);
-        Debug.Log("Gain Hp");
+    }
+
+    public override void aResolve(RuntimeCharacter source, RuntimeCharacter target, int input_value)
+    {
+        var targetHp = target.Hp;
+        var finalHp = targetHp.Value + input_value;
+
+        if (finalHp > target.MaxHp)
+        {
+            finalHp = target.MaxHp;
+        }
+        
+        targetHp.SetValue(finalHp);
+        //Debug.Log("Gain Hp");
     }
 }

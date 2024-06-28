@@ -8,8 +8,9 @@ public class EndTurnButton : MonoBehaviour
     private Button button;
 
     private CardDisplayManager cardDisplayManager;
-    private CardSelectionHasArrow cardSelectionHasArrow;
-    private CardSelectionNoArrow cardSelectionNoArrow;
+    //private CardSelectionHasArrow cardSelectionHasArrow;
+    //private CardSelectionNoArrow cardSelectionNoArrow;
+    private CrackedCardPlayManager crackedCardPlayManager;
     
     private void Awake()
     {
@@ -19,8 +20,9 @@ public class EndTurnButton : MonoBehaviour
     private void Start()
     {
         cardDisplayManager = FindFirstObjectByType<CardDisplayManager>();
-        cardSelectionHasArrow = FindFirstObjectByType<CardSelectionHasArrow>();
-        cardSelectionNoArrow = FindFirstObjectByType<CardSelectionNoArrow>();
+        //cardSelectionHasArrow = FindFirstObjectByType<CardSelectionHasArrow>();
+        //cardSelectionNoArrow = FindFirstObjectByType<CardSelectionNoArrow>();
+        crackedCardPlayManager = FindFirstObjectByType<CrackedCardPlayManager>();
     }
 
     public void OnButtonPressed()
@@ -30,8 +32,7 @@ public class EndTurnButton : MonoBehaviour
             return;
         }
 
-        if (cardSelectionHasArrow.HasSelectedCard() ||
-            cardSelectionNoArrow.HasSelectedCard())
+        if (crackedCardPlayManager.HasSelectedCard())
         {
             return;
         }

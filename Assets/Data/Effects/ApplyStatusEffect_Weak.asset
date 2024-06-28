@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SourceActions: []
   TargetActions: []
+  sprite: {fileID: 21300000, guid: 5d47612d3445f4de4a2c87201ec8bef2, type: 3}
   Target: 1
   Value: 1
   Status: {fileID: 11400000, guid: ca539fd917a3e544393797a1dbc49448, type: 2}

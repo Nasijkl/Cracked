@@ -59,11 +59,11 @@ public class CardSelectionNoArrow : CardSelectionBase
 
         if (hitInfo.collider != null)
         {
-            var card = hitInfo.collider.GetComponent<CardObject>();
-            var cardTemplate = card.template;
+            var card = hitInfo.collider.GetComponent<CrackedCardObject>();
+            var cardData = card.data;
 
-            if (CardUtils.CardCanBePlayed(cardTemplate, playerMana) && 
-                !CardUtils.CardHasTargetableEffect(cardTemplate))
+            if (CardUtils.CardCanBePlayed(cardData, playerMana) && 
+                !CardUtils.CardHasTargetableEffect(cardData))
             {
                 selectedCard = hitInfo.collider.gameObject;
                 originalCardPosition = selectedCard.transform.position;
@@ -96,10 +96,10 @@ public class CardSelectionNoArrow : CardSelectionBase
         // 处理鼠标左键已经松开时的逻辑
         if (Input.GetMouseButtonUp(0))
         {
-            var card = selectedCard.GetComponent<CardObject>();
+            var card = selectedCard.GetComponent<CrackedCardObject>();
             
             // 如果选中卡牌后，鼠标左键已经松开且选中的卡牌是准备打出状态
-            if (card.State == CardObject.CardState.AboutToBePlayed)
+            if (card.State == CrackedCardObject.CardState.AboutToBePlayed)
             {
                 // 设置此状态用于屏蔽掉卡牌的拖拽效果
                 isCardAboutToBePlayed = true;
@@ -124,8 +124,8 @@ public class CardSelectionNoArrow : CardSelectionBase
             //  效果施放区的动画，这时重置卡牌状态，并把它放置会起始位置
             else
             {
-                card.SetState(CardObject.CardState.InHand);
-                selectedCard.GetComponent<CardObject>().Reset(() => selectedCard = null);
+                card.SetState(CrackedCardObject.CardState.InHand);
+                selectedCard.GetComponent<CrackedCardObject>().Reset(() => selectedCard = null);
             }
         }
         
@@ -135,17 +135,17 @@ public class CardSelectionNoArrow : CardSelectionBase
             mousePosition.z = 0;
             selectedCard.transform.position = mousePosition;
 
-            var card = selectedCard.GetComponent<CardObject>();
+            var card = selectedCard.GetComponent<CrackedCardObject>();
             
             // 检测非攻击卡牌在选中后的距离是否足够大，可以改变它的出牌状态
             // 如果足够大，则脱离手握牌状态，进入待出牌状态
             if (mousePosition.y > originalCardPosition.y + CardAboutToBePlayedOffsetY)
             {
-                card.SetState(CardObject.CardState.AboutToBePlayed);
+                card.SetState(CrackedCardObject.CardState.AboutToBePlayed);
             }
             else
             {
-                card.SetState(CardObject.CardState.InHand);
+                card.SetState(CrackedCardObject.CardState.InHand);
             }
         }
     }
@@ -155,7 +155,7 @@ public class CardSelectionNoArrow : CardSelectionBase
     {
         base.PlaySelectedCard();
 
-        var card = selectedCard.GetComponent<CardObject>().runtimeCard;
+        var card = selectedCard.GetComponent<CrackedCardObject>().data;
         effectResolutionManager.ResolveCardEffects(card);
 
     }

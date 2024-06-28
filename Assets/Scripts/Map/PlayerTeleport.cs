@@ -1,17 +1,20 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement; // 用于场景切换
-
+using UnityEngine.SceneManagement;
+using UnityEngine.UI; // 用于场景切换
+using TMPro;
 
 public class PlayerTeleport : MonoBehaviour
 {
-    public GameObject dialogPrefab;
+    public GameObject dialogPrefab; // 对话框的Prefab
+    public GameObject incidentCanvasPrefab; // Incident的Canvas Prefab
     public string targetScene;
     private Canvas dialogCanvas;
+    private Canvas incidentCanvas; // Incident的Canvas组件
     private MaTile selfMaTile;
-    //private Vector3 originalPosition;
     private PlayerMovement playerMovement;
+    public TextMeshProUGUI incidentNameText;
 
     private void Start()
     {
@@ -20,6 +23,9 @@ public class PlayerTeleport : MonoBehaviour
         dialogCanvas = dialogPrefab.GetComponent<Canvas>();
         // 禁用对话框的Canvas
         dialogCanvas.enabled = false;// 获取PlayerMovement脚本
+        incidentCanvas = incidentCanvasPrefab.GetComponent<Canvas>();
+        // 禁用Incident的Canvas
+        incidentCanvas.enabled = false;
         playerMovement = GetComponent<PlayerMovement>();
         
     }
@@ -39,6 +45,29 @@ public class PlayerTeleport : MonoBehaviour
             }
 
         }
+        if (other.CompareTag("Incident"))
+        {
+            incidentCanvas.enabled = true;
+            if (incidentNameText != null)
+            {
+                // 直接获取other对象的名字
+
+                //incidentNameText.text = other.gameObject.name.Replace("(Clone)", "");
+                string incidentName = other.gameObject.name.Replace("(Clone)", "");
+                incidentNameText.text = incidentName;
+
+                IncidentManager incidentManager = incidentCanvas.GetComponent<IncidentManager>();
+                if (incidentManager != null)
+                {
+                    incidentManager.DisplayIncidentBasedOnName(incidentName);
+                }
+                //Destroy(other.gameObject);
+            }
+            // 处理Incident标签的逻辑
+            // 例如，您可以在这里显示不同的对话框，或者执行其他特定于Incident的操作
+            //Debug.Log("Incident发生了！");
+            // 这里添加您的逻辑
+        }
     }
 
     public void OnYesButtonClick()
@@ -55,17 +84,3 @@ public class PlayerTeleport : MonoBehaviour
         Destroy(selfMaTile.gameObject);
     }
 }
-/*private void OnTriggerEnter2D(Collider2D other)
-{
-if (other.CompareTag("MapTile"))
-{
-// 获取地块上的关卡信息
-MaTile mapTile = other.GetComponent<MaTile>();
-if (mapTile != null)
-{
-string targetScene = mapTile.targetScene;
-// 切换到目标关卡
-SceneManager.LoadScene(targetScene);
-}
-}
-}*/

@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/*
 public class CardDeckManager : MonoBehaviour
 {
     private List<RuntimeCard> _deck;
@@ -121,3 +121,4 @@ public class CardDeckManager : MonoBehaviour
         _hand.Clear();
     }
 }
+*/
