@@ -143,7 +143,7 @@ public class GameDriver : MonoBehaviour
 
             Assert.IsNotNull(enemy);
 
-            enemyHp.Value = 20;
+            enemyHp.Value = 6;
             enemyShield.Value = 0;
             
             CreateHpWidget(enemyHpWidget, enemy, enemyHp, 20, enemyShield);
