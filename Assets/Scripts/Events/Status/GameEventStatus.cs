@@ -10,7 +10,7 @@ public class GameEventStatus : ScriptableObject
 {
     private readonly List<GameEventStatusListener> listeners = new List<GameEventStatusListener>();
     
-    public void Raise(StatusTemplate status, int value)
+    public void Raise(CharacterStatus status, int value)
     {
         for (var i = listeners.Count - 1; i >= 0; i--)
             listeners[i].OnEventRaised(status, value);

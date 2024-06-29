@@ -9,9 +9,14 @@ using UnityEngine;
     order = 0)]
 public class IntVariable : ScriptableObject
 {
-    public int Value;
+    private int Value;
 
     public GameEventInt ValueChangedEvent;
+
+    public int GetValue()
+    {
+        return Value;
+    }
 
     public void SetValue(int value)
     {

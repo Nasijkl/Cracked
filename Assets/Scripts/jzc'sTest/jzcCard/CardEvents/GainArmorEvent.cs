@@ -25,6 +25,6 @@ public class GainArmorEvent : CardEvent
         RuntimeCharacter target = target_character.Character as RuntimeCharacter;
         
         var targetShield = target.Shield;
-        targetShield.SetValue(targetShield.Value + value);
+        targetShield.SetValue(targetShield.GetValue() + value);
     }
 }

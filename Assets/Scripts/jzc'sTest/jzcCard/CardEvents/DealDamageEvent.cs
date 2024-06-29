@@ -27,21 +27,16 @@ public class DealDamageEvent : CardEvent
         RuntimeCharacter source = source_character.Character as RuntimeCharacter;
         
         var targetHp = target.Hp;
-        var hp = targetHp.Value;
+        var hp = targetHp.GetValue();
 
         var targetShield = target.Shield;
-        var shield = targetShield.Value;
+        var shield = targetShield.GetValue();
         
         var damage = value;
 
         if (source.Status != null)
         {
-            var weak = source.Status.GetValue("Weak");
-
-            if (weak > 0)
-            {
-                damage = (int)Mathf.Floor(damage * 0.75f);
-            }
+            //TODO: raise deal damage event
         }
 
         if (damage >= shield)

@@ -12,8 +12,8 @@ public class ManaWidget : MonoBehaviour
 
    public void Initialize(IntVariable mana)
    {
-      maxValue = mana.Value;
-      SetValue(mana.Value);
+      maxValue = mana.GetValue();
+      SetValue(mana.GetValue());
    }
 
    private void SetValue(int value)

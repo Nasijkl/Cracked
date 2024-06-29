@@ -63,6 +63,7 @@ public class GameDriver : MonoBehaviour
     
     [SerializeField] private IntVariable enemyHp;
     [SerializeField] private IntVariable playerHp;
+    [SerializeField] private IntVariable playerMana;
     
     [SerializeField] private IntVariable playerShield;
     [SerializeField] private IntVariable enemyShield;
@@ -99,8 +100,8 @@ public class GameDriver : MonoBehaviour
             player = Instantiate(template.Prefab, playerPivot);
             Assert.IsNotNull(player);
 
-            playerHp.Value = 20;
-            playerShield.Value = 0;
+            playerHp.SetValue(20);
+            playerShield.SetValue(0);
             playerManaManager.SetDefaultMana(3);
             
             CreateHpWidget(playerHpWidget, player, playerHp, 30, playerShield);
@@ -122,11 +123,11 @@ public class GameDriver : MonoBehaviour
             {
                 Hp = playerHp, 
                 Shield = playerShield,
-                Mana = 100, 
+                Mana = playerMana, 
                 Status = playerStatus,
                 MaxHp = 100
             };
-            obj.Character.Status.Value.Clear();
+            obj.Character.Status.status_list.Clear();
             
             Initialize();
         };
@@ -143,8 +144,8 @@ public class GameDriver : MonoBehaviour
 
             Assert.IsNotNull(enemy);
 
-            enemyHp.Value = 20;
-            enemyShield.Value = 0;
+            enemyHp.SetValue(20);
+            enemyShield.SetValue(0);
             
             CreateHpWidget(enemyHpWidget, enemy, enemyHp, 20, enemyShield);
             CreateIntentWidget(enemyIntentWidget, enemy);
@@ -155,7 +156,7 @@ public class GameDriver : MonoBehaviour
             { 
                 Hp = enemyHp, 
                 Shield = enemyShield,
-                Mana = 100, 
+                Mana = null, 
                 MaxHp = 100
             };
             
@@ -189,12 +190,17 @@ public class GameDriver : MonoBehaviour
         
         turnManager.BeginGame();
     }
+    
+    public void newBattle(RuntimeCharacter player, List<CrackedCardData> runtime_deck)
+    {
+
+    }
 
     private void CreateHpWidget(GameObject prefab, GameObject character, IntVariable hp, int maxHp, IntVariable shield)
     {
         var hpWidget = Instantiate(prefab, canvas.transform, false);
         var pivot = character.transform;
-        var canvasPosition = mainCamera.WorldToViewportPoint(pivot.position + new Vector3(0.0f, -0.3f, 0.0f));
+        var canvasPosition = mainCamera.WorldToViewportPoint(pivot.position + new Vector3(-0.1f, -0.3f, 0.0f));
         hpWidget.GetComponent<RectTransform>().anchorMin = canvasPosition;
         hpWidget.GetComponent<RectTransform>().anchorMax = canvasPosition;
         hpWidget.GetComponent<HpWidget>().Initialize(hp, maxHp, shield);
@@ -207,7 +213,7 @@ public class GameDriver : MonoBehaviour
         var size = character.GetComponent<BoxCollider2D>().bounds.size;
 
         var canvasPosition = mainCamera.WorldToViewportPoint(
-            pivot.position + new Vector3(0.2f, size.y + 0.7f, 0.0f)
+            pivot.position + new Vector3(0.0f, size.y + 0.7f, 0.0f)
         );
         
         widget.GetComponent<RectTransform>().anchorMin = canvasPosition;

@@ -14,7 +14,7 @@ public class LabelPieceObject : CardPieceObject
         this.sprite = label_data.sprite;
         this.label = label_data.label;
 
-        SpriteRenderer spriteRenderer = this.gameObject.AddComponent<SpriteRenderer>();
+        SpriteRenderer spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = sprite;
     }
     public virtual void OnDrawnEventHandler(){}

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb8481e13c25c64a9df92c7670658a9, type: 3}
+  m_Name: InhalingTheNew
+  m_EditorClassIdentifier: 
+  card_pieces:
+  - {fileID: 11400000, guid: a3164a7b8cf09fa448c536186b6462c3, type: 2}
+  - {fileID: 11400000, guid: 2ff9c25fd7471a14183d020965742ac9, type: 2}
+  - {fileID: 11400000, guid: 2dc44a9dbc77ea041a87b2e2adf60378, type: 2}
+  - {fileID: 11400000, guid: 95f3336dff9e6c6459a8a627d821b80e, type: 2}

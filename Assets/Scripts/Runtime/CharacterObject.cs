@@ -9,7 +9,7 @@ public class CharacterObject : MonoBehaviour
 
     public void OnCharacterDied()
     {
-        if (Character.Hp.Value <= 0)
+        if (Character.Hp.GetValue() <= 0)
         {
             GetComponent<BoxCollider2D>().enabled = false;
             var numberOfChildObjects = transform.childCount;

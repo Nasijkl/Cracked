@@ -12,4 +12,7 @@ public class EnemyTemplate : CharacterTemplate
 {
     public List<Pattern> Patterns = new List<Pattern>();
     public AdaptivePattern adaptivePattern;
+    public EnemyStatus original_status = null;
+
+    public int total_hp;
 }

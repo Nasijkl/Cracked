@@ -11,4 +11,9 @@ using UnityEngine;
 public class HeroTemplate : CharacterTemplate
 {
     public CardBank StartingDeck;
+
+    public List<CrackedCardData> runtime_deck;
+
+    public int total_hp;
+    public int current_hp;
 }

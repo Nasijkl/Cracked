@@ -37,7 +37,7 @@ public class CardSelectionBase : BaseManager
         {
             cost += piece.cost;
         }
-        playerMana.SetValue(playerMana.Value - cost);
+        playerMana.SetValue(playerMana.GetValue() - cost);
         
         cardDisplayManager.ReOrganizeHandCards(selectedCard);
         

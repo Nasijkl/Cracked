@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb8481e13c25c64a9df92c7670658a9, type: 3}
+  m_Name: CleaveTheSun
+  m_EditorClassIdentifier: 
+  card_pieces:
+  - {fileID: 11400000, guid: 8627ae68bf5fa494e8db30c01f01d81d, type: 2}
+  - {fileID: 11400000, guid: c8431d77cbfa8bc47a7ff7b38b27997f, type: 2}
+  - {fileID: 11400000, guid: cd2f6068bd8c2d947abb3c2ee5fa61d0, type: 2}
+  - {fileID: 11400000, guid: 096dce116e8094e4fab272ccf2e8a0e8, type: 2}

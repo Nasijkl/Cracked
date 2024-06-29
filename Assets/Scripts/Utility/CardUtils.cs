@@ -6,6 +6,14 @@ public static class CardUtils
 {
    public static bool CardCanBePlayed(CrackedCardData card, IntVariable playerMana)
    {
+      if(card.card_pieces[0] == null ||
+      card.card_pieces[1] == null ||
+      card.card_pieces[2] == null ||
+      card.card_pieces[3] == null)
+      {
+         return false;
+      }
+
       int cost = 0;
       CostPieceData top_left_piece = card.card_pieces[0] as CostPieceData;
       if(top_left_piece != null)
@@ -17,7 +25,7 @@ public static class CardUtils
       {
          cost += top_right_piece.cost;
       }
-      return cost <= playerMana.Value;
+      return cost <= playerMana.GetValue();
    }
 
    public static List<CrackedCardData> HorizontalCut(CrackedCardData card)
@@ -110,7 +118,6 @@ public static class CardUtils
    
    public static bool CardHasTargetableEffect(CrackedCardData card)
    {
-      //TODO
       /*
       // 判断卡牌是否要展示攻击箭头，判断标准是卡牌是否含有针对攻击敌人的特效，这是一个很必要的函数
       foreach (var effect in card.Effects)

@@ -12,7 +12,7 @@ public class StatusElementWidget : MonoBehaviour
 
    [SerializeField] private TextMeshProUGUI text;
 
-   public string Type;
+   public int trigger_id;
 
    private CanvasGroup canvasGroup;
 
@@ -21,10 +21,10 @@ public class StatusElementWidget : MonoBehaviour
       canvasGroup = GetComponent<CanvasGroup>();
    }
 
-   public void Initialize(StatusTemplate status, int value)
+   public void Initialize(CharacterStatus status, int value)
    {
-      Type = status.Name;
-      icon.sprite = status.Sprite;
+      trigger_id = status.trigger.trigger_id;
+      icon.sprite = status.trigger.sprite;
       text.text = value.ToString();
    }
 

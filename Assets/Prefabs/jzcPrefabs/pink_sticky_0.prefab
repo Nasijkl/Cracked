@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.8951, y: 2.8951, z: 2.8951}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 0.6}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -140,18 +140,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.054571956, y: 1.0728064}
+  m_Offset: {x: -0.016259909, y: -0.013283253}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.46, y: 0.43}
+    oldSize: {x: 2.3, y: 2.15}
     newSize: {x: 0.46, y: 0.43}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.7184203, y: 2.408092}
+  m_Size: {x: 2.3795185, y: 2.2428174}
   m_EdgeRadius: 0
 --- !u!114 &731623777019011919
 MonoBehaviour:
@@ -165,4 +165,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a3179521732dd1459f00a1fb90decd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Template: {fileID: 0}
+  Template: {fileID: 11400000, guid: 1562f0646ad96b9428dfb4edcf56bc0f, type: 2}
