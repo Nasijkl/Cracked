@@ -23,7 +23,6 @@ public class InfiniteMapGenerator : MonoBehaviour
     private GameObject player;
     private PlayerMovement playerMovement;
     private PlayerHealth playerHealth;
-    private Vector3? lastTilePosition = null;
 
     void Start()
     {
@@ -92,13 +91,6 @@ public class InfiniteMapGenerator : MonoBehaviour
             GameObject newTile = Instantiate(selectedPrefab, newPosition, Quaternion.identity);
             mapTiles[tilePosition] = newTile;
             StartCoroutine(FadeInFog(newTile));
-
-            if (lastTilePosition != null)
-            {
-                CreateLineBetweenPoints((Vector3)lastTilePosition, newPosition);
-            }
-
-            lastTilePosition = newPosition;
 
             if (explorationValue >= explorationThreshold)
             {
@@ -172,28 +164,5 @@ public class InfiniteMapGenerator : MonoBehaviour
     {
         // Implement Boss Battle Logic
         Debug.Log("Boss Battle Triggered!");
-    }
-
-    void CreateLineBetweenPoints(Vector3 startPoint, Vector3 endPoint)
-    {
-        GameObject lineObject = new GameObject("Line");
-        LineRenderer lineRenderer = lineObject.AddComponent<LineRenderer>();
-
-        lineRenderer.startWidth = 0.1f;
-        lineRenderer.endWidth = 0.1f;
-        lineRenderer.positionCount = 2;
-        lineRenderer.useWorldSpace = true;
-        lineRenderer.SetPosition(0, startPoint);
-        lineRenderer.SetPosition(1, endPoint);
-
-        // Set the line color
-        lineRenderer.startColor = Color.white;
-        lineRenderer.endColor = Color.white;
-
-        // Set the material
-        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-
-        // Set the order in layer
-        lineRenderer.sortingOrder = 1;
     }
 }

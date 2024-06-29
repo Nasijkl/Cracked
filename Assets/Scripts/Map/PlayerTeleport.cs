@@ -45,6 +45,9 @@ public class PlayerTeleport : MonoBehaviour
     {
         // ÇÐ»»³¡¾°
         Debug.Log("Loading scene: " + targetScene);
+
+
+
         SceneManager.LoadScene(targetScene);
 
     }
