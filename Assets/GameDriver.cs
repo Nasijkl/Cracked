@@ -195,7 +195,12 @@ public class GameDriver : MonoBehaviour
     {
         int enemy_index = random_seed % enemyTemplate.Count;
         CreateEnemy(enemyTemplate[enemy_index]);
+        cardDeckManager.Clear();
+        cardDeckManager.LoadDeck(runtime_deck);
+        cardDeckManager.shuffleDrawPile();
         playerHp.SetValue(player_hp);
+
+        turnManager.BeginGame();
     }
 
     public int endBattle()
@@ -204,8 +209,10 @@ public class GameDriver : MonoBehaviour
         {
             Destroy(enemy);
         }
+        cardDisplayManager.MoveHandToDiscardPile();
         var playerCharacter = player.GetComponent<CharacterObject>();
         playerCharacter.Character.Status.status_list.Clear();
+        characterDeathManager.Clear();
 
         return playerHp.GetValue();
     }

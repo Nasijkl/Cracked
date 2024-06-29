@@ -51,6 +51,13 @@ public class RuntimeDeckManager : MonoBehaviour
         return deckSize;
     }
 
+    public void Clear()
+    {
+        draw_pile.Clear();
+        discard_pile.Clear();
+        hand_cards.Clear();
+    }
+
     public void drawCardsToHand(int draws_num){
         /*
         List<CrackedCardData> drawn_cards = new List<CrackedCardData>(draws_num);

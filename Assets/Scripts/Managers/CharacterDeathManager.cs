@@ -53,6 +53,11 @@ public class CharacterDeathManager : BaseManager
             turnManagement.SetEndOfGame(true);
         }
     }
+
+    public void Clear()
+    {
+        endBattlePopup.Fade();
+    }
     
     
 }

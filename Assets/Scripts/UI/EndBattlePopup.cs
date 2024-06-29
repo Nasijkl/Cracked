@@ -36,6 +36,13 @@ public class EndBattlePopup : MonoBehaviour
         canvasGroup.DOFade(1.0f, FadeInTime);
     }
 
+    public void Fade()
+    {
+        canvasGroup.interactable = false;
+        canvasGroup.blocksRaycasts = false;
+        canvasGroup.DOFade(0.0f, FadeInTime);
+    }
+
     public void SetVictoryText()
     {
         titleText.text = VictoryText;
