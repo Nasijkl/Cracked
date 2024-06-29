@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -32,6 +33,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            // 如果是，直接返回，不执行后面的移动代码
+            return;
+        }
         if (Input.GetMouseButtonDown(0))
         {
             // 鼠标左键被按下

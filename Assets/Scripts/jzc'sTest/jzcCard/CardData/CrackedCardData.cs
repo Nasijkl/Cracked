@@ -18,6 +18,18 @@ public class CrackedCardData : ScriptableObject
 
     public CrackedCardData deepCopy()
     {
+<<<<<<< HEAD
         return this;
+=======
+        CrackedCardData copiedCard = ScriptableObject.CreateInstance<CrackedCardData>();
+        copiedCard.card_pieces = new CardPieceData[card_pieces.Length];
+
+        for (int i = 0; i < card_pieces.Length; i++)
+        {
+            copiedCard.card_pieces[i] = card_pieces[i].deepCopy();
+        }
+
+        return copiedCard;
+>>>>>>> origin/lhr
     }
 }

@@ -11,4 +11,14 @@ using UnityEngine;
 public class CostPieceData : CardPieceData
 {
     public int cost;
+<<<<<<< HEAD
+=======
+    public override CardPieceData deepCopy()
+    {
+        var copy = ScriptableObject.CreateInstance<CostPieceData>();
+        copy.cost = this.cost;
+        copy.sprite = this.sprite;
+        return copy;
+    }
+>>>>>>> origin/lhr
 }

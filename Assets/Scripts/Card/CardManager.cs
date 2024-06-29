@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -38,20 +36,20 @@ public class CardManager : MonoBehaviour
         obj.SetActive(true);
         return obj;
     }
-    
+
     public void ReturnObject(GameObject gameObj)
     {
         var pooledObject = gameObj.GetComponent<ManagedPoolObject>();
         Assert.IsNotNull(pooledObject);
         Assert.IsTrue(pooledObject.cardManager == this);
-        
+
         gameObj.SetActive(false);
         if (!_instances.Contains(gameObj))
         {
             _instances.Push(gameObj);
         }
     }
-    
+
     public class ManagedPoolObject : MonoBehaviour
     {
         public CardManager cardManager;
