@@ -11,8 +11,7 @@ using UnityEngine;
 public class LabelPieceData : CardPieceData
 {
     public CardLabelType label;
-<<<<<<< HEAD
-=======
+
     public override CardPieceData deepCopy()
     {
         var copy = ScriptableObject.CreateInstance<LabelPieceData>();
@@ -20,5 +19,4 @@ public class LabelPieceData : CardPieceData
         copy.sprite = this.sprite;
         return copy;
     }
->>>>>>> origin/lhr
 }

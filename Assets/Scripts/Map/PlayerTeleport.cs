@@ -15,6 +15,8 @@ public class PlayerTeleport : MonoBehaviour
     private MaTile selfMaTile;
     private PlayerMovement playerMovement;
     public TextMeshProUGUI incidentNameText;
+    public InfiniteMapGenerator map;
+    public PlayerHealth playerhp;
 
     private void Start()
     {

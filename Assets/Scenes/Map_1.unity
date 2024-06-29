@@ -336,7 +336,7 @@ PrefabInstance:
     - target: {fileID: 2975704348522298827, guid: b00fe3a2951b5c7489dc853c7c2f9a03, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 53f768cd6c72b4bf49bfd4f889b8246d, type: 3}
+      objectReference: {fileID: 21300000, guid: 95ea40525ef5bc54ab88738118d9c5d0, type: 3}
     - target: {fileID: 2975704348522298827, guid: b00fe3a2951b5c7489dc853c7c2f9a03, type: 3}
       propertyPath: m_SortingOrder
       value: 1
@@ -1111,7 +1111,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.89, y: 2.86}
+    oldSize: {x: 2.5, y: 2.5}
     newSize: {x: 0.6, y: 0.6}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -2031,7 +2031,7 @@ PrefabInstance:
     - target: {fileID: 2975704348522298827, guid: b00fe3a2951b5c7489dc853c7c2f9a03, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: e1741766f3c3e415787fbdd3e0d30a0e, type: 3}
+      objectReference: {fileID: 21300000, guid: 2a281424ca6f0e14296d9dfa5fe532ed, type: 3}
     - target: {fileID: 3318668831391291267, guid: b00fe3a2951b5c7489dc853c7c2f9a03, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.8
@@ -2332,7 +2332,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.07, y: 2.75}
+    oldSize: {x: 2.5, y: 2.5}
     newSize: {x: 0.6, y: 0.6}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -2938,7 +2938,7 @@ PrefabInstance:
     - target: {fileID: 2975704348522298827, guid: b00fe3a2951b5c7489dc853c7c2f9a03, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 0be96f70c9f6e4c50a550df39550bbf9, type: 3}
+      objectReference: {fileID: 21300000, guid: 95ea40525ef5bc54ab88738118d9c5d0, type: 3}
     - target: {fileID: 3318668831391291267, guid: b00fe3a2951b5c7489dc853c7c2f9a03, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.8
@@ -3196,7 +3196,7 @@ PrefabInstance:
     - target: {fileID: 2975704348522298827, guid: b00fe3a2951b5c7489dc853c7c2f9a03, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 6153fe14894024ff58b639f5e456c252, type: 3}
+      objectReference: {fileID: 21300000, guid: af5f278cbea2cfc46a35de4d94b5d3fd, type: 3}
     - target: {fileID: 3318668831391291267, guid: b00fe3a2951b5c7489dc853c7c2f9a03, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.8
@@ -3753,7 +3753,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5, y: 1.54}
+    oldSize: {x: 2.5, y: 2.5}
     newSize: {x: 0.6, y: 0.6}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -4032,7 +4032,7 @@ PrefabInstance:
     - target: {fileID: 2975704348522298827, guid: b00fe3a2951b5c7489dc853c7c2f9a03, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 0343606bf24454d2c802e80020a6e7a3, type: 3}
+      objectReference: {fileID: 21300000, guid: 95ea40525ef5bc54ab88738118d9c5d0, type: 3}
     - target: {fileID: 3318668831391291267, guid: b00fe3a2951b5c7489dc853c7c2f9a03, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.8
@@ -4449,7 +4449,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3f2527dfde2764019bd8e3e2c4bd01f8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 849c36148f011b841bec818766cb74be, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4672,7 +4672,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.5, y: 1.54}
+    oldSize: {x: 2.5, y: 2.5}
     newSize: {x: 0.6, y: 0.6}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -5055,9 +5055,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c118f6f92e3ec54590005fef30df157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  steps:
-  - {fileID: 0}
-  - {fileID: 0}
+  steps: []
 --- !u!4 &1720660324
 Transform:
   m_ObjectHideFlags: 0
@@ -6444,7 +6442,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.41, y: 2.22}
+    oldSize: {x: 2.5, y: 2.5}
     newSize: {x: 0.6, y: 0.6}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -6605,6 +6603,10 @@ PrefabInstance:
     - target: {fileID: 726674725054046457, guid: 53f07a9d763083c47a9b358b6187b8aa, type: 3}
       propertyPath: m_SortingLayerID
       value: -1060307395
+      objectReference: {fileID: 0}
+    - target: {fileID: 2220294313852431497, guid: 53f07a9d763083c47a9b358b6187b8aa, type: 3}
+      propertyPath: maxHealth
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 2324241497556903926, guid: 53f07a9d763083c47a9b358b6187b8aa, type: 3}
       propertyPath: m_Layer
@@ -6826,7 +6828,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogPrefab: {fileID: 1341500988}
+  incidentCanvasPrefab: {fileID: 0}
   targetScene: 
+  incidentNameText: {fileID: 0}
+  map: {fileID: 583647137}
+  playerhp: {fileID: 8726867292101864565}
 --- !u!114 &8726867292101864563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6840,6 +6846,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fogDisappearDelay: 0.2
+--- !u!114 &8726867292101864565 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2220294313852431497, guid: 53f07a9d763083c47a9b358b6187b8aa, type: 3}
+  m_PrefabInstance: {fileID: 8726867292101864554}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8726867292101864555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d86a1c5d9552d8a4daa2fd56f94b919b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class InventoryManager : MonoBehaviour
 {
@@ -78,7 +79,7 @@ public class InventoryManager : MonoBehaviour
         {
             case 0:
                 Debug.Log("Healing potion used.");
-                // Heal the player
+                //LoadScene("YourSceneName");
                 break;
             case 1:
                 Debug.Log("Mana potion used.");

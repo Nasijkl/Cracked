@@ -11,8 +11,7 @@ using UnityEngine;
 public class EffectPieceData : CardPieceData
 {
     public List<CardEventTuple> events = new List<CardEventTuple>();
-<<<<<<< HEAD
-=======
+
     public override CardPieceData deepCopy()
     {
         var copy = ScriptableObject.CreateInstance<EffectPieceData>();
@@ -24,5 +23,4 @@ public class EffectPieceData : CardPieceData
         copy.sprite = this.sprite;
         return copy;
     }
->>>>>>> origin/lhr
 }
