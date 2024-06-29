@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Assertions;
@@ -53,7 +54,7 @@ public class GameDriver : MonoBehaviour
     [SerializeField] private DiscardPileWidget discardPileWidget;
     
 
-    [SerializeField] private AssetReference enemyTemplate;
+    [SerializeField] private List<AssetReference> enemyTemplate;
     [SerializeField] private AssetReference playerTemplate;
 
     [SerializeField] private GameObject enemyHpWidget;
@@ -80,7 +81,6 @@ public class GameDriver : MonoBehaviour
         SetCursorTexture();
 
         CreatePlayer(playerTemplate);
-        CreateEnemy(enemyTemplate);
     }
 
     private void SetCursorTexture()
@@ -191,9 +191,23 @@ public class GameDriver : MonoBehaviour
         turnManager.BeginGame();
     }
     
-    public void newBattle(RuntimeCharacter player, List<CrackedCardData> runtime_deck)
+    public void newBattle(int player_hp, List<CrackedCardData> runtime_deck, int random_seed)
     {
+        int enemy_index = random_seed % enemyTemplate.Count;
+        CreateEnemy(enemyTemplate[enemy_index]);
+        playerHp.SetValue(player_hp);
+    }
 
+    public int endBattle()
+    {
+        foreach (var enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+        var playerCharacter = player.GetComponent<CharacterObject>();
+        playerCharacter.Character.Status.status_list.Clear();
+
+        return playerHp.GetValue();
     }
 
     private void CreateHpWidget(GameObject prefab, GameObject character, IntVariable hp, int maxHp, IntVariable shield)
