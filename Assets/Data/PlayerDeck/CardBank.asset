@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8ae828db6d9e8f47a1e94e9e5cda1be, type: 3}
+  m_Name: CardBank
+  m_EditorClassIdentifier: 
+  Name: PlayerDeck
+  Items:
+  - Card: {fileID: 11400000, guid: 3375749e4c8d52d43b302adb2aef4323, type: 2}
+    Amount: 5
+  - Card: {fileID: 11400000, guid: d4dc03f2a28b33c4ba7adf199c3857f1, type: 2}
+    Amount: 5
+  - Card: {fileID: 11400000, guid: 6cd6c621db994ae4cbaa856d18a3a44e, type: 2}
+    Amount: 5
+  - Card: {fileID: 11400000, guid: 833e76e70e41ade499c1fb35e16e511a, type: 2}
+    Amount: 5
