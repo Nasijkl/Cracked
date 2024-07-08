@@ -63,10 +63,6 @@ public class PlayerTeleport : MonoBehaviour
                 }
                 //Destroy(other.gameObject);
             }
-            // 处理Incident标签的逻辑
-            // 例如，您可以在这里显示不同的对话框，或者执行其他特定于Incident的操作
-            //Debug.Log("Incident发生了！");
-            // 这里添加您的逻辑
         }
     }
 

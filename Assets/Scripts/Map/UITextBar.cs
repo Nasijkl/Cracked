@@ -11,19 +11,19 @@ public class UIManager : MonoBehaviour
     public Slider explorationSlider;
     public Slider healthSlider;
 
-    private PlayerHealth playerHealth;
-    private InfiniteMapGenerator mapGenerator;
+    public PlayerHealth playerHealth;
+    public InfiniteMapGenerator mapGenerator;
 
-    void Start()
+    /*void Start()
     {
-        playerHealth = FindObjectOfType<PlayerHealth>();
-        mapGenerator = FindObjectOfType<InfiniteMapGenerator>();
+        //playerHealth = FindObjectOfType<PlayerHealth>();
+       // mapGenerator = FindObjectOfType<InfiniteMapGenerator>();
 
         if (playerHealth == null || mapGenerator == null)
         {
             Debug.LogError("PlayerHealth or InfiniteMapGenerator component is missing in the scene.");
         }
-    }
+    }*/
 
     void Update()
     {

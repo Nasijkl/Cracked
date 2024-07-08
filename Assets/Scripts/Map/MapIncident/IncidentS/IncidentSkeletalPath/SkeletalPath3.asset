@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b7a0b26a088c70489c9fbfcc378a42c, type: 3}
+  m_Name: SkeletalPath3
+  m_EditorClassIdentifier: 
+  id: 5
+  text: You dropped into a trap. Lose 5 health.
+  sprite: {fileID: 0}
+  pageList: 04000000
+  pageTextList:
+  - Leave

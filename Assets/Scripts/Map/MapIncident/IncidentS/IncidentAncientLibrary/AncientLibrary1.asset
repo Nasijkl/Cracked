@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa9d3e7b4c95ee4983dbe86139d57d2, type: 3}
+  m_Name: AncientLibrary1
+  m_EditorClassIdentifier: 
+  id: 0
+  text: You've come to the atrium of an ancient library. Although the building is
+    very old, you surprisingly find that there is no enemies in there. You decide
+    to go around try to find something...
+  sprite: {fileID: 0}
+  pageList: 0a0000000b0000000c000000
+  pageTextList:
+  - Turn Left
+  - Search Around
+  - Turn left

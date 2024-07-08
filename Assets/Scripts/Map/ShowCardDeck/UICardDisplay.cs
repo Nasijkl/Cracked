@@ -46,18 +46,22 @@ public class UICardDisplay : MonoBehaviour
             float yPosition = 380 - row * (2 + rectTransform.sizeDelta.y); // 计算y位置
             rectTransform.anchoredPosition = new Vector2(xPosition, yPosition);
 
-            for (int j = 0; j < card.card_pieces.Length; j++)
+            for (int j = 0; j < 4; j++)
             {
                 // 为每个CardPieceData创建一个Image组件
                 GameObject pieceObject = new GameObject($"Piece_{j}");
                 pieceObject.transform.SetParent(cardObject.transform, false);
-                Image pieceImage = pieceObject.AddComponent<Image>();
-                pieceImage.sprite = card.card_pieces[j].sprite;
-
-                // 设置RectTransform以适应父对象
-                RectTransform pieceRectTransform = pieceObject.GetComponent<RectTransform>();
-                pieceRectTransform.anchoredPosition = Vector2.zero;
-                pieceRectTransform.sizeDelta = new Vector2(60, 75); // 根据需要调整大小
+                if(card.card_pieces[j]!= null)
+                {
+                    Image pieceImage = pieceObject.AddComponent<Image>();
+                    pieceImage.sprite = card.card_pieces[j].sprite;
+                    // 设置RectTransform以适应父对象
+                    RectTransform pieceRectTransform = pieceObject.GetComponent<RectTransform>();
+                    pieceRectTransform.anchoredPosition = Vector2.zero;
+                    pieceRectTransform.sizeDelta = new Vector2(60, 75); // 根据需要调整大小
+                }
+           
+                
             }
 
             cardIndex++; // 更新卡牌索引

@@ -15,23 +15,18 @@ public class GlobalDeckManager : MonoBehaviour
         LoadCardsFromCardBank();
     }
 
-    // ´ÓCardBank¼ÓÔØ¿¨ÅÆµ½card_deck
     void LoadCardsFromCardBank()
     {
         if (cardBank != null)
         {
             card_deck.Clear();
 
-            // ´´½¨Ò»¸öÁÐ±íÀ´´æ´¢ÐèÒªÉ¾³ýµÄÏî
             List<CardBankItem> itemsToRemove = new List<CardBankItem>();
 
             foreach (CardBankItem item in cardBank.Items)
             {
-                // ¼ì²é¿¨ÅÆÊÇ·ñÎªNone
                 if (item.Card != null && item.Card.name != "Missing")
                 {
-                    // ½«¿¨ÅÆÊýÁ¿ÉèÖÃÎª5
-                    item.Amount = 5;
                     for (int i = 0; i < item.Amount; i++)
                     {
                         card_deck.Add(item.Card);
@@ -39,12 +34,10 @@ public class GlobalDeckManager : MonoBehaviour
                 }
                 else
                 {
-                    // ½«ÐèÒªÉ¾³ýµÄÏîÌí¼Óµ½ÁÐ±íÖÐ
                     itemsToRemove.Add(item);
                 }
             }
 
-            // ±éÀúÍê³Éºó£¬É¾³ýËùÓÐÐèÒªÉ¾³ýµÄÏî
             foreach (var itemToRemove in itemsToRemove)
             {
                 cardBank.Items.Remove(itemToRemove);
@@ -64,7 +57,7 @@ public class GlobalDeckManager : MonoBehaviour
     {
         bool removed = card_deck.Remove(card);
 
-        // Èç¹û³É¹¦ÒÆ³ý£¬²¢ÇÒcardBank²»Îª¿Õ£¬Ôò¸üÐÂcardBank
+        // ï¿½ï¿½ï¿½ï¿½É¹ï¿½ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½cardBankï¿½ï¿½Îªï¿½Õ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½cardBank
         if (removed && cardBank != null)
         {
             cardBank.RemoveCardFromBank(card);
@@ -72,17 +65,17 @@ public class GlobalDeckManager : MonoBehaviour
     }
     public List<CrackedCardData> getRandomCards(int num)
     {
-        if (card_deck.Count == 0 || num <= 0) return new List<CrackedCardData>(); // Èç¹û¿¨×éÎª¿Õ»òÇëÇó¿¨ÅÆÊýÁ¿Ð¡ÓÚµÈÓÚ0£¬Ôò·µ»Ø¿ÕÁÐ±í
+        if (card_deck.Count == 0 || num <= 0) return new List<CrackedCardData>(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½Õ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð¡ï¿½Úµï¿½ï¿½ï¿½0ï¿½ï¿½ï¿½ò·µ»Ø¿ï¿½ï¿½Ð±ï¿½
 
-        if (num >= card_deck.Count) return getDuplicatedDeck(); // Èç¹ûÇëÇó¿¨ÅÆÊýÁ¿´óÓÚµÈÓÚ¿¨×éÖÐµÄÊýÁ¿£¬Ôò·µ»Ø¿¨×éµÄ¸±±¾
+        if (num >= card_deck.Count) return getDuplicatedDeck(); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò·µ»Ø¿ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½
 
         List<CrackedCardData> result = new List<CrackedCardData>();
 
         while (result.Count < num)
         {
-            int randomIndex = UnityEngine.Random.Range(0, card_deck.Count); // Ëæ»ú»ñÈ¡¿¨×éÖÐµÄÒ»¸öË÷Òý
-            CrackedCardData randomCard = card_deck[randomIndex]; // »ñÈ¡¿¨×éÖÐ¶ÔÓ¦Ë÷ÒýµÄ¿¨ÅÆ
-            if (!result.Contains(randomCard)) result.Add(randomCard); // Èç¹û½á¹ûÁÐ±íÖÐ²»°üº¬¸Ã¿¨ÅÆ£¬ÔòÌí¼Óµ½½á¹ûÁÐ±íÖÐ
+            int randomIndex = UnityEngine.Random.Range(0, card_deck.Count); // ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            CrackedCardData randomCard = card_deck[randomIndex]; // ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ð¶ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½
+            if (!result.Contains(randomCard)) result.Add(randomCard); // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½Ð²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½Æ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½ï¿½ï¿½
         }
 
         return result;
@@ -336,7 +329,7 @@ public class GlobalDeckManager : MonoBehaviour
                     }
                 }
 
-                if (nonNullPieces < 2)
+                if (nonNullPieces < 3)
                 {
                     isValid = false;
                 }
@@ -583,14 +576,14 @@ public class GlobalDeckManager : MonoBehaviour
             // Loop through the cardsToDelete list and remove each card from the card_deck
             foreach (CrackedCardData card in cardsToDelete)
             {
-                bool removed = card_deck.Remove(card); // ³¢ÊÔÒÆ³ý¿¨ÅÆ£¬²¢¼ÇÂ¼½á¹û
+                bool removed = card_deck.Remove(card); // ï¿½ï¿½ï¿½ï¿½ï¿½Æ³ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½
                 if (!removed)
                 {
-                    failedDeletions++; // Èç¹ûÒÆ³ýÊ§°Ü£¬Ôö¼ÓÊ§°Ü¼ÆÊýÆ÷
+                    failedDeletions++; // ï¿½ï¿½ï¿½ï¿½Æ³ï¿½Ê§ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü¼ï¿½ï¿½ï¿½ï¿½ï¿½
                 }
-                else if (cardBank != null) // Èç¹ûÒÆ³ý³É¹¦£¬²¢ÇÒcardBank²»Îª¿Õ
+                else if (cardBank != null) // ï¿½ï¿½ï¿½ï¿½Æ³ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½cardBankï¿½ï¿½Îªï¿½ï¿½
                 {
-                    cardBank.RemoveCardFromBank(card); // ´ÓcardBankÖÐÒÆ³ý¿¨ÅÆ
+                    cardBank.RemoveCardFromBank(card); // ï¿½ï¿½cardBankï¿½ï¿½ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½
                 }
             }
         }

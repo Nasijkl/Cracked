@@ -43,6 +43,14 @@ public class IncidentManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+        Transform otherContainer = incidentCanvas.transform.Find("Other");
+        if (otherContainer != null)
+        {
+            foreach (Transform child in otherContainer)
+            {
+                Destroy(child.gameObject);
+            }
+        }
         float screenWidth = Screen.width;
         float screenHeight = Screen.height;
 
@@ -73,10 +81,18 @@ public class IncidentManager : MonoBehaviour
             rectTransform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
 
             Button btn = buttonObj.GetComponent<Button>();
-            if (incident.pageList.Count == 1 && incident.pageTextList[i].Equals("Leave", StringComparison.OrdinalIgnoreCase))
+            if (incident.pageList.Count == 1)
             {
-                // 如果只有一个按钮且文本是"Leave"，则添加关闭Canvas并返回地图的事件监听器
-                btn.onClick.AddListener(CloseCanvasAndReturnToMap);
+                if (incident.pageTextList[i].Equals("Leave", StringComparison.OrdinalIgnoreCase))
+                {
+                    // 如果只有一个按钮且文本是"Leave"，则添加关闭Canvas并返回地图的事件监听器
+                    btn.onClick.AddListener(CloseCanvasAndReturnToMap);
+                }
+                else if (incident.pageTextList[i].Equals("Battle", StringComparison.OrdinalIgnoreCase))
+                {
+                    // 如果只有一个按钮且文本是"Battle"，则添加加载"FirstScene"场景的事件监听器
+                    btn.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene("FirstScene"));
+                }
             }
             else
             {

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3043473356708365877}
   - component: {fileID: 230739024163427213}
   - component: {fileID: 5607543102617964380}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: CardPieceOne
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,5 +99,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 0}
   parent: {fileID: 0}
-  cost: 2
+  cost: 0
   costText: {fileID: 0}

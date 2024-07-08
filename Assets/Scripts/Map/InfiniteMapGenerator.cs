@@ -31,6 +31,7 @@ public class InfiniteMapGenerator : MonoBehaviour
         Random.InitState(seed);
         mapTiles = new Dictionary<Vector2, GameObject>();
         player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
+        seed = Random.Range(0, 100); // 随机生成一个种子
         playerMovement = player.GetComponent<PlayerMovement>();
         playerHealth = player.GetComponent<PlayerHealth>();
         playerCurrentTile = GetTilePosition(player.transform.position);
@@ -93,13 +94,14 @@ public class InfiniteMapGenerator : MonoBehaviour
             float chance = Random.Range(0f, 100f);
             GameObject selectedPrefab;
 
-            if (chance < 2f) // 有2%的概率选择最后一个Prefab
+            if (chance < 5f) // 有2%的概率从最后五个Prefab中随机选择一个
             {
-                selectedPrefab = mapTilePrefabs[mapTilePrefabs.Length - 1];
+                int randomIndex = Random.Range(mapTilePrefabs.Length - 5, mapTilePrefabs.Length);
+                selectedPrefab = mapTilePrefabs[randomIndex];
             }
             else // 其他情况下，从前面的Prefab中随机选择
             {
-                int randomIndex = Random.Range(0, mapTilePrefabs.Length - 1); // 从前面的元素中随机选择
+                int randomIndex = Random.Range(0, mapTilePrefabs.Length - 5); // 从前面的元素中随机选择
                 selectedPrefab = mapTilePrefabs[randomIndex];
             }
             GameObject newTile = Instantiate(selectedPrefab, newPosition, Quaternion.identity);
@@ -168,6 +170,13 @@ public class InfiniteMapGenerator : MonoBehaviour
 
         // 检查Dialog Canvas是否激活
         if (dialogCanvas != null && dialogCanvas.enabled)
+        {
+            flag = false;
+        }
+        Canvas dialogCanvas1 = GameObject.Find("Incident").GetComponent<Canvas>();
+
+        // 检查Dialog Canvas是否激活
+        if (dialogCanvas1 != null && dialogCanvas1.enabled)
         {
             flag = false;
         }

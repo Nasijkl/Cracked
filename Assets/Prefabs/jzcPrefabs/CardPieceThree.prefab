@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5487801565241543978}
   - component: {fileID: 8452058694647209136}
   - component: {fileID: 1954918077486885553}
-  m_Layer: 5
+  m_Layer: 0
   m_Name: CardPieceThree
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,6 +99,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 0}
   parent: {fileID: 0}
-  event_list: []
   nameText: {fileID: 0}
   descriptionText: {fileID: 0}

@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb8481e13c25c64a9df92c7670658a9, type: 3}
+  m_Name: CrackedCard_AttackOne_AttackTwo_AttackThree_RightVoidEffect
+  m_EditorClassIdentifier: 
+  card_pieces:
+  - {fileID: 11400000, guid: 5f18a0e805f0bcc489fe08220fa4ec14, type: 2}
+  - {fileID: 11400000, guid: 31ebf2ae93c4a19499e86978ed372d8b, type: 2}
+  - {fileID: 11400000, guid: 29955d1340bb0364788b8fe609331b71, type: 2}
+  - {fileID: 11400000, guid: c4bde1700d62eb84c86787e818f2af46, type: 2}
