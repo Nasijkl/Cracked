@@ -5,15 +5,13 @@ using UnityEngine;
 public class InfiniteMapGenerator : MonoBehaviour
 {
     public GameObject playerPrefab;
-    //public GameObject mapTilePrefab;
     public GameObject[] mapTilePrefabs; // an array to store all the mapTilePrefabs
-    //public GameObject newMapTilePrefab; // 新的地图块Prefab
     public int seed;
     public int mapTileSize = 10;
-    public int loadRadius = 2; // 减少加载半径，减少生成的地图块数量
-    public float minDistanceBetweenTiles = 30f; // 增加地图块之间的最小距离
-    public float maxRandomOffset = 10f; // 增加随机偏移的最大值
-    public float fadeDuration = 1f; // 淡入效果持续时间
+    public int loadRadius = 2; // reduce the loading radius to reduce the number of map tiles generated
+    public float minDistanceBetweenTiles = 30f; // increase the minimum distance between map tiles
+    public float maxRandomOffset = 10f; // increase the maximum random offset
+    public float fadeDuration = 1f; // fade-in effect duration
     public float stamina = 100f;
     public float staminaConsumptionRate = 1f;
     public float fatigueDamageRate = 1f;
@@ -21,6 +19,7 @@ public class InfiniteMapGenerator : MonoBehaviour
     public float explorationThreshold = 100f;
 
     private Dictionary<Vector2, GameObject> mapTiles;
+    private List<Vector3> tilePositions; // List to store tile positions
     private Vector2 playerCurrentTile;
     private GameObject player;
     private PlayerMovement playerMovement;
@@ -30,12 +29,13 @@ public class InfiniteMapGenerator : MonoBehaviour
     {
         Random.InitState(seed);
         mapTiles = new Dictionary<Vector2, GameObject>();
+        tilePositions = new List<Vector3>();
         player = Instantiate(playerPrefab, Vector3.zero, Quaternion.identity);
-        seed = Random.Range(0, 100); // 随机生成一个种子
         playerMovement = player.GetComponent<PlayerMovement>();
         playerHealth = player.GetComponent<PlayerHealth>();
         playerCurrentTile = GetTilePosition(player.transform.position);
         GenerateTilesAround(playerCurrentTile);
+        ConnectTiles();
     }
 
     void Update()
@@ -46,6 +46,7 @@ public class InfiniteMapGenerator : MonoBehaviour
         {
             playerCurrentTile = playerPosition;
             GenerateTilesAround(playerCurrentTile);
+            ConnectTiles(); // Update connections as new tiles are generated
         }
 
         HandleStamina();
@@ -87,39 +88,58 @@ public class InfiniteMapGenerator : MonoBehaviour
             attempts++;
         } while (!IsPositionValid(newPosition) && attempts < 10);
 
-        if (attempts < 10) // 成功找到有效位置
+        if (attempts < 10) // successfully found a valid position
         {
-            //GameObject selectedPrefab = Random.value > 0.5f ? mapTilePrefab : newMapTilePrefab; // 随机选择一个地图块Prefab
-            // 生成一个0到100的随机数，用于决定是否选择最后一个Prefab
-            float chance = Random.Range(0f, 100f);
-            GameObject selectedPrefab;
-
-            if (chance < 2f) // 有2%的概率选择最后一个Prefab
-            {
-                selectedPrefab = mapTilePrefabs[mapTilePrefabs.Length - 1];
-            }
-            else // 其他情况下，从前面的Prefab中随机选择
-            {
-                int randomIndex = Random.Range(0, mapTilePrefabs.Length - 1); // 从前面的元素中随机选择
-                selectedPrefab = mapTilePrefabs[randomIndex];
-            }
+            int randomIndex = Random.Range(0, mapTilePrefabs.Length); // generate a random index
+            GameObject selectedPrefab = mapTilePrefabs[randomIndex]; // select a prefab from the array
             GameObject newTile = Instantiate(selectedPrefab, newPosition, Quaternion.identity);
             mapTiles[tilePosition] = newTile;
+            tilePositions.Add(newPosition); // Store the tile position
             StartCoroutine(FadeInFog(newTile));
-            explorationValue += 10f; // Adjust as needed
 
             if (explorationValue >= explorationThreshold)
             {
                 // Trigger Boss Battle
                 TriggerBossBattle();
-                explorationValue = 0f; // Reset exploration value after boss battle
+                explorationValue = 0f; // reset exploration value after boss battle
+            }
+        }
+    }
+
+    void ConnectTiles()
+    {
+        // Clear existing lines
+        foreach (var line in GameObject.FindGameObjectsWithTag("Line"))
+        {
+            Destroy(line);
+        }
+
+        int gridSize = 3;
+        Dictionary<Vector2, List<Vector3>> gridBlocks = new Dictionary<Vector2, List<Vector3>>();
+
+        foreach (var pos in tilePositions)
+        {
+            Vector2 gridPos = new Vector2(Mathf.Floor(pos.x / (mapTileSize * gridSize)), Mathf.Floor(pos.y / (mapTileSize * gridSize)));
+            if (!gridBlocks.ContainsKey(gridPos))
+            {
+                gridBlocks[gridPos] = new List<Vector3>();
+            }
+            gridBlocks[gridPos].Add(pos);
+        }
+
+        // Connect tiles within each 3x3 block
+        foreach (var block in gridBlocks.Values)
+        {
+            for (int i = 0; i < block.Count - 1; i++)
+            {
+                CreateLineBetweenPoints(block[i], block[i + 1]);
             }
         }
     }
 
     IEnumerator FadeInFog(GameObject tile)
     {
-        // 找到子物体中标签为 "Fog" 的SpriteRenderer
+        // find the child objects tagged as "Fog"
         Transform[] children = tile.GetComponentsInChildren<Transform>();
         foreach (Transform child in children)
         {
@@ -162,48 +182,49 @@ public class InfiniteMapGenerator : MonoBehaviour
 
     void HandleStamina()
     {
-        bool flag = playerMovement.isMoving;
-
-        // 假设Dialog是Canvas的名称，首先需要获取到这个Canvas对象
-        Canvas dialogCanvas = GameObject.Find("Dialog").GetComponent<Canvas>();
-
-        // 检查Dialog Canvas是否激活
-        if (dialogCanvas != null && dialogCanvas.enabled)
-        {
-            flag = false;
-        }
-        Canvas dialogCanvas1 = GameObject.Find("Incident").GetComponent<Canvas>();
-
-        // 检查Dialog Canvas是否激活
-        if (dialogCanvas1 != null && dialogCanvas1.enabled)
-        {
-            flag = false;
-        }
-
-        if (flag)
-        {
-            stamina -= staminaConsumptionRate * Time.deltaTime;
-            if (stamina <= 0)
-            {
-                stamina = 0;
-                playerHealth.TakeDamage(fatigueDamageRate * Time.deltaTime);
-            }
-        }
-        /*
         if (playerMovement.isMoving)
         {
-            stamina -= staminaConsumptionRate * Time.deltaTime;
+            float staminaDecrease = staminaConsumptionRate * Time.deltaTime;
+            stamina -= staminaDecrease;
+            explorationValue += staminaDecrease; // increase exploration value based on stamina decrease
+
             if (stamina <= 0)
             {
                 stamina = 0;
                 playerHealth.TakeDamage(fatigueDamageRate * Time.deltaTime);
             }
-        }*/
+        }
     }
 
     void TriggerBossBattle()
     {
         // Implement Boss Battle Logic
         Debug.Log("Boss Battle Triggered!");
+    }
+
+    void CreateLineBetweenPoints(Vector3 startPoint, Vector3 endPoint)
+    {
+        GameObject lineObject = new GameObject("Line");
+        LineRenderer lineRenderer = lineObject.AddComponent<LineRenderer>();
+
+        lineRenderer.startWidth = 0.1f;
+        lineRenderer.endWidth = 0.1f;
+        lineRenderer.positionCount = 2;
+        lineRenderer.useWorldSpace = true;
+        lineRenderer.SetPosition(0, startPoint);
+        lineRenderer.SetPosition(1, endPoint);
+
+        // Set the line color
+        lineRenderer.startColor = Color.white;
+        lineRenderer.endColor = Color.white;
+
+        // Set the material
+        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+
+        // Set the order in layer
+        lineRenderer.sortingOrder = 1;
+
+        // Tag the line for easy cleanup
+        lineObject.tag = "Line";
     }
 }

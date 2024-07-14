@@ -99,7 +99,7 @@ public class GameDriver : MonoBehaviour
             player = Instantiate(template.Prefab, playerPivot);
             Assert.IsNotNull(player);
 
-            playerHp.Value = 20;
+            playerHp.Value = 30;
             playerShield.Value = 0;
             playerManaManager.SetDefaultMana(3);
             
@@ -143,7 +143,7 @@ public class GameDriver : MonoBehaviour
 
             Assert.IsNotNull(enemy);
 
-            enemyHp.Value = 6;
+            enemyHp.Value = 20;
             enemyShield.Value = 0;
             
             CreateHpWidget(enemyHpWidget, enemy, enemyHp, 20, enemyShield);

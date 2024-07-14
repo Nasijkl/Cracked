@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb8481e13c25c64a9df92c7670658a9, type: 3}
+  m_Name: CrackedCard_DefendOne_DefendTwo_LeftVoidEffect_HorizontalCutFour
+  m_EditorClassIdentifier: 
+  card_pieces:
+  - {fileID: 11400000, guid: 6edf080b45b2b3f4996cc8ca8ecd9c29, type: 2}
+  - {fileID: 11400000, guid: be56e2106ccf21b478208bab32900a90, type: 2}
+  - {fileID: 11400000, guid: 622527d2784260d4b8ec20e07b677b5e, type: 2}
+  - {fileID: 11400000, guid: d354da4d7847129498048b386140ff13, type: 2}
