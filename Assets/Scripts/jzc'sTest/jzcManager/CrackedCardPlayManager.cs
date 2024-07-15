@@ -102,13 +102,11 @@ public class CrackedCardPlayManager : CardSelectionBase
             var card = hitInfo.collider.GetComponent<CrackedCardObject>();
             var cardData = card.data;
 
-            if (CardUtils.CardCanBePlayed(cardData, playerMana))
-            {
-                selectedCard = hitInfo.collider.gameObject;
-                originalCardPosition = selectedCard.transform.position;
-                originalCardRotation = selectedCard.transform.rotation;
-                originalCardSortingOrder = selectedCard.GetComponent<SortingGroup>().sortingOrder;
-            }
+            selectedCard = hitInfo.collider.gameObject;
+            originalCardPosition = selectedCard.transform.position;
+            originalCardRotation = selectedCard.transform.rotation;
+            originalCardSortingOrder = selectedCard.GetComponent<SortingGroup>().sortingOrder;
+
         }
     }
 
@@ -180,7 +178,7 @@ public class CrackedCardPlayManager : CardSelectionBase
             var card = selectedCard.GetComponent<CrackedCardObject>();
             
             // 如果选中卡牌后，鼠标左键已经松开且选中的卡牌是准备打出状态
-            if (card.State == CrackedCardObject.CardState.AboutToBePlayed)
+            if (card.State == CrackedCardObject.CardState.AboutToBePlayed && CardUtils.CardCanBePlayed(card.data, playerMana))
             {
                 // 设置此状态用于屏蔽掉卡牌的拖拽效果
                 isCardAboutToBePlayed = true;

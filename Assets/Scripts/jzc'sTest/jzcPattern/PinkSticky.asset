@@ -18,3 +18,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c93a6ea173979554095903095ce83b9c, type: 2}
   - {fileID: 0}
   adaptivePattern: {fileID: 11400000, guid: 4581e0af9315cf94e8f148e2e287a460, type: 2}
+  original_status: {fileID: 0}
+  total_hp: 6

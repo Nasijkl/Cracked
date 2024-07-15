@@ -195,17 +195,17 @@ public class InfiniteMapGenerator : MonoBehaviour
     {
         bool flag = playerMovement.isMoving;
 
-        // ¼ÙÉèDialogÊÇCanvasµÄÃû³Æ£¬Ê×ÏÈÐèÒª»ñÈ¡µ½Õâ¸öCanvas¶ÔÏó
+        // ï¿½ï¿½ï¿½ï¿½Dialogï¿½ï¿½Canvasï¿½ï¿½ï¿½ï¿½ï¿½Æ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Canvasï¿½ï¿½ï¿½ï¿½
         Canvas dialogCanvas = GameObject.Find("Dialog").GetComponent<Canvas>();
 
-        // ¼ì²éDialog CanvasÊÇ·ñ¼¤»î
+        // ï¿½ï¿½ï¿½Dialog Canvasï¿½Ç·ñ¼¤»ï¿½
         if (dialogCanvas != null && dialogCanvas.enabled)
         {
             flag = false;
         }
         Canvas dialogCanvas1 = GameObject.Find("Incident").GetComponent<Canvas>();
 
-        // ¼ì²éDialog CanvasÊÇ·ñ¼¤»î
+        // ï¿½ï¿½ï¿½Dialog Canvasï¿½Ç·ñ¼¤»ï¿½
         if (dialogCanvas1 != null && dialogCanvas1.enabled)
         {
             flag = false;
@@ -236,19 +236,22 @@ public class InfiniteMapGenerator : MonoBehaviour
         GameObject lineObject = new GameObject("Line");
         LineRenderer lineRenderer = lineObject.AddComponent<LineRenderer>();
 
-        lineRenderer.startWidth = 0.1f;
-        lineRenderer.endWidth = 0.1f;
+        lineRenderer.startWidth = 0.15f;
+        lineRenderer.endWidth = 0.15f;
         lineRenderer.positionCount = 2;
         lineRenderer.useWorldSpace = true;
-        lineRenderer.SetPosition(0, startPoint);
-        lineRenderer.SetPosition(1, endPoint);
 
-        // Set the line color
-        lineRenderer.startColor = Color.white;
-        lineRenderer.endColor = Color.white;
+        Vector3 orient = Vector3.Normalize(startPoint - endPoint);
+
+        lineRenderer.SetPosition(0, startPoint-orient);
+        lineRenderer.SetPosition(1, endPoint-orient);
 
         // Set the material
         lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
+
+        // Set the line color
+        lineRenderer.startColor = new Color(50, 48, 43);
+        lineRenderer.endColor = new Color(50, 48, 43);
 
         // Set the order in layer
         lineRenderer.sortingOrder = 1;
