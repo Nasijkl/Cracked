@@ -5,6 +5,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class EndBattlePopup : MonoBehaviour
@@ -50,9 +51,8 @@ public class EndBattlePopup : MonoBehaviour
 
     public void OnEndOfGameButtonPressed()
     {
-#if UNITY_EDITOR
-        EditorApplication.isPlaying = false;
-#endif
+        SceneManager.LoadScene("Map");
+        /*EditorApplication.isPlaying = false;*/
     }
     
     
