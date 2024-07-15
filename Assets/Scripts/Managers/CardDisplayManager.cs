@@ -23,7 +23,7 @@ public class CardDisplayManager : MonoBehaviour
 
     private const float Radius = 16.0f;
 
-    private readonly Vector3 _center = new(-15.0f, -18.5f, 0.0f);
+    private readonly Vector3 _center = new(-15.0f, -18.0f, 0.0f);
     private readonly Vector3 _originalCardScale = new(0.5f, 0.5f, 1.0f);
 
     private bool isCardMoving;
@@ -242,10 +242,25 @@ public class CardDisplayManager : MonoBehaviour
         });
     }
 
-    public void DistroyCardInHand(GameObject gameObj)
+    public void DestroyCardInHand(CrackedCardData data)
     {
-        //TODO: handle card in runtime deck manager
+        GameObject gameObj = null;
+        for(int i = 0; i < _handCards.Count; i++)
+        {
+            var card_object = _handCards[i].GetComponent<CrackedCardObject>();
+            if(card_object.data == data)
+            {
+                gameObj = _handCards[i];
+            }
+        }
+
+        if(gameObj == null)
+        {
+            return;
+        }
+
         _handCards.Remove(gameObj);
+        
         var sequence = DOTween.Sequence();
         sequence.AppendCallback(() =>
         {

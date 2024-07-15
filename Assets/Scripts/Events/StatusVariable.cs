@@ -8,11 +8,20 @@ using UnityEngine;
     order = 1)]
 public class StatusVariable : ScriptableObject
 {
-    public Dictionary<string, int> Value = new Dictionary<string, int>();
-    public Dictionary<string, StatusTemplate> Template = new Dictionary<string, StatusTemplate>();
+    //public Dictionary<string, int> Value = new Dictionary<string, int>();
+    //public Dictionary<string, StatusTemplate> Template = new Dictionary<string, StatusTemplate>();
+
+    public List<CharacterStatus> status_list = new List<CharacterStatus>();
 
     public GameEventStatus ValueChangedEvent;
 
+    public void AddStatus(CharacterStatus status)
+    {
+        this.status_list.Add(status);
+    }
+
+
+    /*
     public int GetValue(string status)
     {
         if (Value.ContainsKey(status))
@@ -34,4 +43,5 @@ public class StatusVariable : ScriptableObject
             Template.Add(statusName, statusTemplate);
         }
     }
+    */
 }

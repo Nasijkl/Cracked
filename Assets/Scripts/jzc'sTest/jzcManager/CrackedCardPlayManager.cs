@@ -26,6 +26,8 @@ public class CrackedCardPlayManager : CardSelectionBase
 
     private List<GameObject> selectedObjects = new List<GameObject>();
 
+    [SerializeField] private GameEvent PlayerPlayCardEvent;
+
     private void Update()
     {
         if (cardDisplayManager.isMoving())
@@ -88,8 +90,6 @@ public class CrackedCardPlayManager : CardSelectionBase
     {
         if (selectedCard != null)
             return;
-
-        Debug.Log("selectedCard == null");
         
         // 检查玩家是否在卡牌的上方作了点击操作
         var mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
@@ -102,11 +102,8 @@ public class CrackedCardPlayManager : CardSelectionBase
             var card = hitInfo.collider.GetComponent<CrackedCardObject>();
             var cardData = card.data;
 
-            //TODO: judge if it's a complete card
-
             if (CardUtils.CardCanBePlayed(cardData, playerMana))
             {
-                Debug.Log("CardCanBePlayed");
                 selectedCard = hitInfo.collider.gameObject;
                 originalCardPosition = selectedCard.transform.position;
                 originalCardRotation = selectedCard.transform.rotation;
@@ -225,9 +222,10 @@ public class CrackedCardPlayManager : CardSelectionBase
                     {
                         cards.Clear();
                         cards.Add(combined_card);
-                        cardDisplayManager.DistroyCardInHand(card_1.gameObject);
-                        cardDisplayManager.DistroyCardInHand(card_2.gameObject);
-                        cardDisplayManager.CreateHandCards(cards);
+
+                        deckManager.DestroyCardFromHand(card_1.gameObject);
+                        deckManager.DestroyCardFromHand(card_2.gameObject);
+                        deckManager.AddCardToHand(cards);
                     }
                     else
                     {
@@ -284,11 +282,9 @@ public class CrackedCardPlayManager : CardSelectionBase
                     target_count++;
                     if(target_count > selectedObjects.Count)
                     {
-                        Debug.Log("target_count > selectedObjects.Count");
                         isEnemyToBeSelected = true;
                         return;
                     }
-                    Debug.Log("target_count <= selectedObjects.Count");
                 }
                 else if(card_event.primary_target == EventTargetType.SelectedHandCard)
                 {
@@ -328,6 +324,7 @@ public class CrackedCardPlayManager : CardSelectionBase
             }
         }
 
+        PlayerPlayCardEvent.Raise();
         base.PlaySelectedCard();
 
         isCardAboutToBePlayed = false;

@@ -19,7 +19,7 @@ public class EnemyAIManager : BaseManager
     private const float ThinkingTime = 1.5f;
 
 
-    public override void Initialize(CharacterObject player, List<CharacterObject> enemies, RuntimeDeckManager deck)
+    public override void Initialize(CharacterObject player, List<CharacterObject> enemies)
     {
         base.Initialize(player, enemies);
         brains = new List<EnemyAI>(enemies.Count);

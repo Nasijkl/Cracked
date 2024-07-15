@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class GameEventStatusListener : MonoBehaviour
 {
     public GameEventStatus Event;
-    public UnityEvent<StatusTemplate, int> Response;
+    public UnityEvent<CharacterStatus, int> Response;
 
     private void OnEnable()
     {
@@ -18,7 +18,7 @@ public class GameEventStatusListener : MonoBehaviour
         Event.UnregisterListener(this);
     }
 
-    public void OnEventRaised(StatusTemplate status, int value)
+    public void OnEventRaised(CharacterStatus status, int value)
     {
         Response.Invoke(status, value);
     }

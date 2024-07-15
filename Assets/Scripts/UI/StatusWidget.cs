@@ -8,13 +8,13 @@ public class StatusWidget : MonoBehaviour
 
     private readonly List<StatusElementWidget> elements = new List<StatusElementWidget>();
 
-    public void OnStatusChanged(StatusTemplate status, int value)
+    public void OnStatusChanged(CharacterStatus status, int value)
     {
         var foundElement = false;
 
         foreach (var element in elements)
         {
-            if (element.Type == status.Name)
+            if (element.trigger_id == status.trigger.trigger_id)
             {
                 if (value > 0)
                 {

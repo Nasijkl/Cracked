@@ -9,7 +9,7 @@ public class RuntimeDeckManager : MonoBehaviour
 
     private List<CrackedCardData> draw_pile;
     private List<CrackedCardData> discard_pile;
-    private List<CrackedCardData> hand_cards;
+    public List<CrackedCardData> hand_cards;
     private const int preset_draw_pile_size = 50;
     private const int preset_hand_size = 10;
     private const int preset_discard_pile_size = 50;
@@ -51,7 +51,15 @@ public class RuntimeDeckManager : MonoBehaviour
         return deckSize;
     }
 
+    public void Clear()
+    {
+        draw_pile.Clear();
+        discard_pile.Clear();
+        hand_cards.Clear();
+    }
+
     public void drawCardsToHand(int draws_num){
+        /*
         List<CrackedCardData> drawn_cards = new List<CrackedCardData>(draws_num);
 
         while(draws_num > 0 && draw_pile.Count > 0)
@@ -74,12 +82,42 @@ public class RuntimeDeckManager : MonoBehaviour
             }
         }
         hand_cards.AddRange(drawn_cards);
-        //Debug.Log(drawn_cards[0]);
-        //Debug.Log(drawn_cards[0].card_pieces[0]);
-        //Debug.Log(drawn_cards[0].card_pieces[1]);
-        //Debug.Log(drawn_cards[0].card_pieces[2]);
-        //Debug.Log(drawn_cards[0].card_pieces[3]);
         cardDisplayManager.CreateHandCards(drawn_cards, draw_pile.Count);
+        */
+        var deckSize = draw_pile.Count;
+
+        if (deckSize >= draws_num)
+        {
+            var previousDeckSize = deckSize;
+
+            var drawnCards = new List<CrackedCardData>(draws_num);
+
+            for (var i = 0; i < draws_num; i++)
+            {
+                var card = draw_pile[0];
+                draw_pile.RemoveAt(0);
+                hand_cards.Add(card);
+                drawnCards.Add(card);
+            }
+            
+            cardDisplayManager.CreateHandCards(drawnCards, previousDeckSize);
+        }
+        // 如果deck中没有足够的牌，则对废弃牌堆中的牌洗一次牌，然后将洗好的牌放于deck中，然后再从deck中
+        // 去牌放到手中
+        else
+        {
+            shufflePile();
+
+            cardDisplayManager.UpdateDiscardPileSize(discard_pile.Count);
+            
+            // 防止抽的牌的数量大于deck的数量
+            if (draws_num > draw_pile.Count + discard_pile.Count)
+            {
+                draws_num = draw_pile.Count + discard_pile.Count;
+            }
+            
+            drawCardsToHand(draws_num);
+        }
 
         return;
     }
@@ -106,13 +144,24 @@ public class RuntimeDeckManager : MonoBehaviour
         return;
     }
 
-    public void AddCardToHand(CrackedCardData card)
+    public void AddCardToHand(List<CrackedCardData> card)
     {
-        hand_cards.Add(card);
+        hand_cards.AddRange(card);
+        cardDisplayManager.CreateHandCards(card);
     }
 
     public void DestroyCardFromHand(CrackedCardData card)
     {
+        cardDisplayManager.DestroyCardInHand(card);
+        hand_cards.Remove(card);
+
+    }
+
+    public void DestroyCardFromHand(GameObject game_object)
+    {
+        var card_object = game_object.GetComponent<CrackedCardObject>();
+        CrackedCardData card = card_object.data;
+        cardDisplayManager.DestroyCardInHand(card);
         hand_cards.Remove(card);
     }
 

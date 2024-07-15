@@ -14,7 +14,7 @@ public class EffectPieceObject : CardPieceObject
         this.sprite = effect_data.sprite;
         //TODO: add event class
 
-        SpriteRenderer spriteRenderer = this.gameObject.AddComponent<SpriteRenderer>();
+        SpriteRenderer spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = sprite;
     }
 }

@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5874507856709798636}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.235, y: -0.083, z: 0.19043516}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -100,6 +100,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   card_pieces: []
+  PartOnePrefab: {fileID: 5310281045024732534, guid: c3db14fc882cb0742887f8c40ccc048f, type: 3}
+  PartTwoPrefab: {fileID: 2280367046093412280, guid: d1213f4d37a46bb4d8198683bc8f8ef4, type: 3}
+  PartThreePrefab: {fileID: 2195386274191137059, guid: fbe22a9c6c0fabf42a9ca52148fecddc, type: 3}
+  PartFourPrefab: {fileID: 8786601221788755756, guid: f9e0bfcdc2f975048a41c382dc5cb551, type: 3}
   data: {fileID: 0}
 --- !u!210 &4805694695990882489
 SortingGroup:

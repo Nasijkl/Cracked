@@ -16,4 +16,4 @@ MonoBehaviour:
   Value: 0
   primary_target: 1
   secondary_target: 0
-  text: 
+  text: Gain $value armor.

@@ -16,7 +16,7 @@ public class GainHpEffect : IntegerEffect, IEntityEffect
     public override void Resolve(RuntimeCharacter source, RuntimeCharacter target)
     {
         var targetHp = target.Hp;
-        var finalHp = targetHp.Value + Value;
+        var finalHp = targetHp.GetValue() + Value;
 
         if (finalHp > target.MaxHp)
         {
@@ -29,7 +29,7 @@ public class GainHpEffect : IntegerEffect, IEntityEffect
     public override void aResolve(RuntimeCharacter source, RuntimeCharacter target, int input_value)
     {
         var targetHp = target.Hp;
-        var finalHp = targetHp.Value + input_value;
+        var finalHp = targetHp.GetValue() + input_value;
 
         if (finalHp > target.MaxHp)
         {

@@ -18,15 +18,19 @@ public class VerticalCutHandCardEvent : CardEvent
     public override void Resolve(GameObject source_object, GameObject target_object, int value)
     {
         var target_component = target_object.GetComponent<CrackedCardObject>();
-        var source_component = source_object.GetComponent<CardDisplayManager>();
+        var source_component = source_object.GetComponent<RuntimeDeckManager>();
         if(target_component == null || source_component == null)
         {
             return;
         }
         
         List<CrackedCardData> pieces = CardUtils.VerticalCut(target_component.data);
-        source_component.DistroyCardInHand(target_object);
-        source_component.CreateHandCards(pieces);
+        if(pieces == null)
+        {
+            return;
+        }
+        source_component.DestroyCardFromHand(target_object);
+        source_component.AddCardToHand(pieces);
 
         return;
     }

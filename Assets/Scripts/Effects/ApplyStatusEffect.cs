@@ -25,13 +25,13 @@ public class ApplyStatusEffect : IntegerEffect, IEntityEffect
 
     public override void Resolve(RuntimeCharacter source, RuntimeCharacter target)
     {
-        var currentValue = target.Status.GetValue(Status.Name);
-        target.Status.SetValue(Status, currentValue + Value);
+        //var currentValue = target.Status.GetValue(Status.Name);
+        //target.Status.SetValue(Status, currentValue + Value);
     }
 
     public override void aResolve(RuntimeCharacter source, RuntimeCharacter target, int input_value)
     {
-        var currentValue = target.Status.GetValue(Status.Name);
-        target.Status.SetValue(Status, currentValue + input_value);
+        //var currentValue = target.Status.GetValue(Status.Name);
+        //target.Status.SetValue(Status, currentValue + input_value);
     }
 }

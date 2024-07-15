@@ -18,12 +18,12 @@ public class GainShieldEffect : IntegerEffect, IEntityEffect
     public override void Resolve(RuntimeCharacter source, RuntimeCharacter target)
     {
         var targetShield = target.Shield;
-        targetShield.SetValue(targetShield.Value + Value);
+        targetShield.SetValue(targetShield.GetValue() + Value);
     }
 
     public override void aResolve(RuntimeCharacter source, RuntimeCharacter target, int input_value)
     {
         var targetShield = target.Shield;
-        targetShield.SetValue(targetShield.Value + input_value);
+        targetShield.SetValue(targetShield.GetValue() + input_value);
     }
 }

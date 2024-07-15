@@ -11,11 +11,15 @@ using UnityEngine;
 public class GameEvent : ScriptableObject
 {
     private readonly List<GameEventListener> listeners = new List<GameEventListener>();
+    private readonly List<Trigger> triggers = new List<Trigger>();
     
     public void Raise()
     {
         for (var i = listeners.Count - 1; i >= 0; i--)
             listeners[i].OnEventRaised();
+
+        for (var i = triggers.Count - 1; i >= 0; i--)
+            triggers[i].OnEventRaised();
     }
     
     public void RegisterListener(GameEventListener listener)
@@ -24,9 +28,21 @@ public class GameEvent : ScriptableObject
             listeners.Add(listener);
     }
 
+    public void RegisterTrigger(Trigger trigger)
+    {
+        if (!triggers.Contains(trigger))
+            triggers.Add(trigger);
+    }
+
     public void UnregisterListener(GameEventListener listener)
     {
         if (listeners.Contains(listener))
             listeners.Remove(listener);
+    }
+
+    public void UnregisterTrigger(Trigger trigger)
+    {
+        if (triggers.Contains(trigger))
+            triggers.Remove(trigger);
     }
 }

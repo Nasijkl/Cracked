@@ -10,6 +10,15 @@ using UnityEngine.Rendering;
 public class CrackedCardObject : MonoBehaviour
 {
     [SerializeField]public GameObject[] card_pieces  = new GameObject[4];
+
+    [SerializeField]
+    private GameObject PartOnePrefab;
+    [SerializeField]
+    private GameObject PartTwoPrefab;
+    [SerializeField]
+    private GameObject PartThreePrefab;
+    [SerializeField]
+    private GameObject PartFourPrefab;
     
     public CrackedCardData data;
     //public RuntimeCard runtimeCard;
@@ -69,27 +78,31 @@ public class CrackedCardObject : MonoBehaviour
         {
             if(data.card_pieces[i]!=null)
             {
-                GameObject child_object = new GameObject("card_piece_" + i);
-                child_object.transform.parent = transform;
-                child_object.transform.localPosition = new Vector3(0.16f,0.05f,0);
-                child_object.transform.localScale = Vector3.one;
+                GameObject child_object;
+                //child_object.transform.parent = transform;
+                //child_object.transform.localPosition = new Vector3(0.16f,0.05f,0);
+                //child_object.transform.localScale = Vector3.one;
                 
                 CardPieceObject piece;
                 if(data.card_pieces[i] is CostPieceData)
                 {
-                    piece = child_object.AddComponent<CostPieceObject>();
+                    child_object = Instantiate(PartOnePrefab, transform);
+                    piece = child_object.GetComponent<CostPieceObject>();
                 }
                 else if(data.card_pieces[i] is LabelPieceData)
                 {
-                    piece = child_object.AddComponent<LabelPieceObject>();
+                    child_object = Instantiate(PartTwoPrefab, transform);
+                    piece = child_object.GetComponent<LabelPieceObject>();
                 }
                 else if(data.card_pieces[i] is EffectPieceData && i == 2)
                 {
-                    piece = child_object.AddComponent<LeftEffectPieceObject>();
+                    child_object = Instantiate(PartThreePrefab, transform);
+                    piece = child_object.GetComponent<LeftEffectPieceObject>();
                 }
                 else // if(data.card_pieces[i] is CostPieceData && i ==3)
                 {
-                    piece = child_object.AddComponent<RightEffectPieceObject>();
+                    child_object = Instantiate(PartFourPrefab, transform);
+                    piece = child_object.GetComponent<RightEffectPieceObject>();
                 }
                 piece.initialize(data.card_pieces[i]);
             }

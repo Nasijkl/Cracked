@@ -11,21 +11,16 @@ public class DealDamageEffect : IntegerEffect, IEntityEffect
     public override void Resolve(RuntimeCharacter source, RuntimeCharacter target)
     {
         var targetHp = target.Hp;
-        var hp = targetHp.Value;
+        var hp = targetHp.GetValue();
 
         var targetShield = target.Shield;
-        var shield = targetShield.Value;
+        var shield = targetShield.GetValue();
         
         var damage = Value;
 
         if (source.Status != null)
         {
-            var weak = source.Status.GetValue("Weak");
-
-            if (weak > 0)
-            {
-                damage = (int)Mathf.Floor(damage * 0.75f);
-            }
+            //TODO: raise deal damage event
         }
 
         if (damage >= shield)
@@ -57,21 +52,16 @@ public class DealDamageEffect : IntegerEffect, IEntityEffect
     public override void aResolve(RuntimeCharacter source, RuntimeCharacter target, int input_value)
     {
         var targetHp = target.Hp;
-        var hp = targetHp.Value;
+        var hp = targetHp.GetValue();
 
         var targetShield = target.Shield;
-        var shield = targetShield.Value;
+        var shield = targetShield.GetValue();
         
         var damage = input_value;
 
         if (source.Status != null)
         {
-            var weak = source.Status.GetValue("Weak");
-
-            if (weak > 0)
-            {
-                damage = (int)Mathf.Floor(damage * 0.75f);
-            }
+            //TODO: raise deal damage event
         }
 
         if (damage >= shield)

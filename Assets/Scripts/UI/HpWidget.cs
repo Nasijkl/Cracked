@@ -28,8 +28,8 @@ public class HpWidget : MonoBehaviour
      public void Initialize(IntVariable hp, int max, IntVariable shield)
      {
           maxValue = max;
-          SetHp(hp.Value);
-          SetShield(shield.Value);
+          SetHp(hp.GetValue());
+          SetShield(shield.GetValue());
      }
      
      private void SetShield(int value)

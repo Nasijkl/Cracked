@@ -8,6 +8,7 @@ public class RuntimeCharacter
     public IntVariable Shield;
 
     public StatusVariable Status;
-    public int Mana;
+    public IntVariable Mana;
+    //public int Mana;
     public int MaxHp;
 }

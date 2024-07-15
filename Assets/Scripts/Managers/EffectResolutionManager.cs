@@ -3,9 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using Random = UnityEngine.Random;
+
 public class EffectResolutionManager : BaseManager
 {
     public CardSelectionHasArrow cardSelectionHasArrow;
+    public GameEventStatus ValueChangedEvent;
     private CharacterObject _currentEnemy;
     private CardDisplayManager _cardDisplayManager;
 
@@ -102,7 +105,7 @@ public class EffectResolutionManager : BaseManager
                 }
                 else if(tuple.card_event.secondary_target == EventTargetType.Hand)
                 {
-                    secondary_object = _cardDisplayManager.gameObject;
+                    secondary_object = runtimeDeckManager.gameObject;
                 }
                 else if(tuple.card_event.secondary_target == EventTargetType.PlayerSelf)
                 {
@@ -137,6 +140,72 @@ public class EffectResolutionManager : BaseManager
             }
         }
         */
+    }
+
+    public void ResolveCardEvent(CardEvent card_event, int value, GameObject enemy = null)
+    {
+        GameObject primary_object;
+        GameObject secondary_object;
+        int target_index = 0;
+        //TODO: handle all the target type
+        if(card_event.primary_target == EventTargetType.Null)
+        {
+            primary_object = null;
+        }
+        else if(card_event.primary_target == EventTargetType.PlayerSelf)
+        {
+            primary_object = Player.gameObject;
+        }
+        else if(card_event.primary_target == EventTargetType.SelectedEnemy)
+        {
+            if(enemy == null)
+            {
+                //select a random enemy if not indicated
+                //TODO: use seed to generate random nums
+                int rd = Random.Range(0, this.Enemies.Count);
+                primary_object = this.Enemies[rd].gameObject;
+                target_index++;
+            }
+            else
+            {
+                primary_object = enemy;
+            }
+
+            
+        }
+        else if(card_event.primary_target == EventTargetType.SelectedHandCard)
+        {
+            //random handcard would be selected in Resolve() function
+            primary_object = null;
+            target_index++;
+        }
+        else
+        {
+            primary_object = null;
+        }
+
+        if(card_event.secondary_target == EventTargetType.Null)
+        {
+            secondary_object = null;
+        }
+        else if(card_event.secondary_target == EventTargetType.Deck)
+        {
+            secondary_object = runtimeDeckManager.gameObject;
+        }
+        else if(card_event.secondary_target == EventTargetType.Hand)
+        {
+            secondary_object = runtimeDeckManager.gameObject;
+        }
+        else if(card_event.secondary_target == EventTargetType.PlayerSelf)
+        {
+            secondary_object = Player.gameObject;
+        }
+        else
+        {
+            secondary_object = null;
+        }
+
+        card_event.Resolve(secondary_object, primary_object, value);
     }
     
     public void SetCurrentEnemy(CharacterObject enemy)

@@ -7,6 +7,7 @@ public class CostPieceObject : CardPieceObject
 {
     public int cost;
 
+
     [SerializeField] private TextMeshPro costText;
 
     public override int pieceType(){
@@ -17,8 +18,9 @@ public class CostPieceObject : CardPieceObject
         CostPieceData cost_data = data as CostPieceData;
         this.sprite = cost_data.sprite;
         this.cost = cost_data.cost;
+        costText.text = cost_data.cost.ToString();
 
-        SpriteRenderer spriteRenderer = this.gameObject.AddComponent<SpriteRenderer>();
+        SpriteRenderer spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = sprite;
     }
 

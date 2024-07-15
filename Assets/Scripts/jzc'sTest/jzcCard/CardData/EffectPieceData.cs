@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 [Serializable]
@@ -10,16 +11,18 @@ using UnityEngine;
     order = 3)]
 public class EffectPieceData : CardPieceData
 {
+    public string name_text;
+
     public List<CardEventTuple> events = new List<CardEventTuple>();
-    public override CardPieceData deepCopy()
+
+    public StringBuilder effectText()
     {
-        var copy = ScriptableObject.CreateInstance<EffectPieceData>();
-        foreach (var cardEventTuple in this.events)
+        StringBuilder text = new StringBuilder();
+        for(int i= 0; i < events.Count; i++)
         {
-            // 由于CardEventTuple是一个结构体，这里的赋值会创建一个新的副本
-            copy.events.Add(new CardEventTuple { card_event = cardEventTuple.card_event, value = cardEventTuple.value });
+            text.Append(events[i].card_event.getText().Replace("$value", events[i].value.ToString()));
+            text.Append(" ");
         }
-        copy.sprite = this.sprite;
-        return copy;
+        return text;
     }
 }
