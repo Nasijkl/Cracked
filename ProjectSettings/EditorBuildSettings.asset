@@ -8,5 +8,23 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Map.unity
+    guid: b11ce343bc088fb4e88e8c35d516d768
+  - enabled: 1
+    path: Assets/Scenes/Fire.unity
+    guid: a7457462d732d1146b63cf1e335120a7
+  - enabled: 1
+    path: Assets/Scenes/Separate.unity
+    guid: f0f6e72049af34b4cbd6001c0418e5bb
+  - enabled: 1
+    path: Assets/Scenes/Shop_renewed.unity
+    guid: 3732fda9a35798f4d8a5cc42f9032bef
+  - enabled: 1
+    path: Assets/Scenes/Synthesis.unity
+    guid: 474381434d0bda5439f461764cd122d5
+  - enabled: 1
+    path: Assets/DragonCrasher/Scenes/FirstScene.unity
+    guid: 042cbdb2416aa094e99fbdbd484d0199
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: e1199068a2bb8be4fb255ec5f9280f6d, type: 2}

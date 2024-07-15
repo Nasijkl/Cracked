@@ -12,7 +12,7 @@ public class StatusVariable : ScriptableObject
     //public Dictionary<string, StatusTemplate> Template = new Dictionary<string, StatusTemplate>();
 
     public List<CharacterStatus> status_list = new List<CharacterStatus>();
-
+    public List<CharacterStatus> Value;
     public GameEventStatus ValueChangedEvent;
 
     public void AddStatus(CharacterStatus status)

@@ -1,18 +1,15 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Assertions;
 
-
 public class GameDriver : MonoBehaviour
 {
     public Texture2D cursorTexture;
     public CursorMode cursorMode = CursorMode.Auto;
-    
+
     private Camera mainCamera;
-    
+
     public CardBank startingDeck;
 
     private GameObject player;
@@ -25,24 +22,24 @@ public class GameDriver : MonoBehaviour
 
     //[SerializeField] private CardDeckManager cardDeckManager;
     [SerializeField] private RuntimeDeckManager cardDeckManager;
-    
-    [SerializeField]  private EffectResolutionManager effectResolutionManager;
-    //[SerializeField]  private CardSelectionHasArrow cardSelectionHasArrow;
-    [SerializeField]  private CrackedCardPlayManager crackedCardPlayManager;
+
+    [SerializeField] private EffectResolutionManager effectResolutionManager;
+    //[SerializeField] private CardSelectionHasArrow cardSelectionHasArrow;
+    [SerializeField] private CrackedCardPlayManager crackedCardPlayManager;
 
     [SerializeField] private TurnManager turnManager;
     [SerializeField] private EnemyAIManager enemyAIManager;
     [SerializeField] private PlayerManaManager playerManaManager;
     [SerializeField] private CharacterDeathManager characterDeathManager;
-    
+
     private List<CrackedCardData> _playerDeck = new List<CrackedCardData>();
 
-    [Header("Character pivots")] 
+    [Header("Character pivots")]
     [SerializeField]
     public Transform playerPivot;
     [SerializeField]
     public Transform enemyPivot;
-    
+
     [Header("UI")]
     [SerializeField]
     private Canvas canvas;
@@ -51,7 +48,6 @@ public class GameDriver : MonoBehaviour
 
     [SerializeField] private DeckWidget deckWidget;
     [SerializeField] private DiscardPileWidget discardPileWidget;
-    
 
     [SerializeField] private AssetReference enemyTemplate;
     [SerializeField] private AssetReference playerTemplate;
@@ -60,21 +56,20 @@ public class GameDriver : MonoBehaviour
     [SerializeField] private GameObject playerHpWidget;
     [SerializeField] private GameObject enemyIntentWidget;
     [SerializeField] private GameObject playerStatusWidget;
-    
+
     [SerializeField] private IntVariable enemyHp;
     [SerializeField] private IntVariable playerHp;
-    
+
     [SerializeField] private IntVariable playerShield;
     [SerializeField] private IntVariable enemyShield;
 
     [SerializeField] private StatusVariable playerStatus;
-    
-    
+
     private void Start()
     {
         mainCamera = Camera.main;
         cardManager.Initialize();
-        
+
         // 设置鼠标图标
         SetCursorTexture();
 
@@ -102,12 +97,12 @@ public class GameDriver : MonoBehaviour
             playerHp.Value = 20;
             playerShield.Value = 0;
             playerManaManager.SetDefaultMana(3);
-            
+
             CreateHpWidget(playerHpWidget, player, playerHp, 30, playerShield);
             CreateStatusWidget(playerStatusWidget, player);
-            
+
             manaWidget.Initialize(playerManaManager.playerManaVariable);
-            
+
             foreach (var item in template.StartingDeck.Items)
             {
                 for (int i = 0; i < item.Amount; i++)
@@ -120,14 +115,14 @@ public class GameDriver : MonoBehaviour
             obj.Template = template;
             obj.Character = new RuntimeCharacter()
             {
-                Hp = playerHp, 
+                Hp = playerHp,
                 Shield = playerShield,
-                Mana = 100, 
+                Mana = CreateIntVariableWithValue(100),
                 Status = playerStatus,
                 MaxHp = 100
             };
             obj.Character.Status.Value.Clear();
-            
+
             Initialize();
         };
     }
@@ -145,22 +140,29 @@ public class GameDriver : MonoBehaviour
 
             enemyHp.Value = 6;
             enemyShield.Value = 0;
-            
+
             CreateHpWidget(enemyHpWidget, enemy, enemyHp, 20, enemyShield);
             CreateIntentWidget(enemyIntentWidget, enemy);
-            
+
             var obj = enemy.GetComponent<CharacterObject>();
             obj.Template = template;
-            obj.Character = new RuntimeCharacter 
-            { 
-                Hp = enemyHp, 
+            obj.Character = new RuntimeCharacter
+            {
+                Hp = enemyHp,
                 Shield = enemyShield,
-                Mana = 100, 
+                Mana = CreateIntVariableWithValue(100),
                 MaxHp = 100
             };
-            
+
             enemies.Add(enemy);
         };
+    }
+
+    private IntVariable CreateIntVariableWithValue(int value)
+    {
+        var intVariable = ScriptableObject.CreateInstance<IntVariable>();
+        intVariable.Value = value;
+        return intVariable;
     }
 
     public void Initialize()
@@ -170,7 +172,7 @@ public class GameDriver : MonoBehaviour
         cardDeckManager.shuffleDrawPile();
 
         cardDisplayManager.Initialize(cardManager, deckWidget, discardPileWidget);
-        
+
         //cardDeckManager.DrawCardsFromDeck(5);
 
         var playerCharacter = player.GetComponent<CharacterObject>();
@@ -180,13 +182,13 @@ public class GameDriver : MonoBehaviour
         {
             enemyCharacters.Add(enemy.GetComponent<CharacterObject>());
         }
-        
+
         //cardSelectionHasArrow.Initialize(playerCharacter, enemyCharacters);
         crackedCardPlayManager.Initialize(playerCharacter, enemyCharacters);
         enemyAIManager.Initialize(playerCharacter, enemyCharacters);
         effectResolutionManager.Initialize(playerCharacter, enemyCharacters, cardDeckManager);
         characterDeathManager.Initialize(playerCharacter, enemyCharacters);
-        
+
         turnManager.BeginGame();
     }
 
@@ -209,17 +211,17 @@ public class GameDriver : MonoBehaviour
         var canvasPosition = mainCamera.WorldToViewportPoint(
             pivot.position + new Vector3(0.2f, size.y + 0.7f, 0.0f)
         );
-        
+
         widget.GetComponent<RectTransform>().anchorMin = canvasPosition;
         widget.GetComponent<RectTransform>().anchorMax = canvasPosition;
     }
 
     private void CreateStatusWidget(GameObject prefab, GameObject character)
     {
-        var hpWidget = Instantiate(prefab, canvas.transform, false);
+        var statusWidget = Instantiate(prefab, canvas.transform, false);
         var pivot = character.transform;
         var canvasPosition = mainCamera.WorldToViewportPoint(pivot.position + new Vector3(0.0f, -0.8f, 0.0f));
-        hpWidget.GetComponent<RectTransform>().anchorMin = canvasPosition;
-        hpWidget.GetComponent<RectTransform>().anchorMax = canvasPosition;
+        statusWidget.GetComponent<RectTransform>().anchorMin = canvasPosition;
+        statusWidget.GetComponent<RectTransform>().anchorMax = canvasPosition;
     }
 }
