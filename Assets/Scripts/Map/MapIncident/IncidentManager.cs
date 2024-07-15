@@ -33,7 +33,7 @@ public class IncidentManager : MonoBehaviour
             eventContentText.text = incident.text;
             CreateButtonsForIncident(incident);
         }
-  
+
     }
     // 根据IncidentPageData的PageList创建按钮
     public void CreateButtonsForIncident(IncidentPageData incident)
@@ -42,6 +42,14 @@ public class IncidentManager : MonoBehaviour
         foreach (Transform child in buttonContainer.transform)
         {
             Destroy(child.gameObject);
+        }
+        Transform otherContainer = incidentCanvas.transform.Find("Other");
+        if (otherContainer != null)
+        {
+            foreach (Transform child in otherContainer)
+            {
+                Destroy(child.gameObject);
+            }
         }
         float screenWidth = Screen.width;
         float screenHeight = Screen.height;
@@ -73,15 +81,32 @@ public class IncidentManager : MonoBehaviour
             rectTransform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
 
             Button btn = buttonObj.GetComponent<Button>();
-            if (incident.pageList.Count == 1 && incident.pageTextList[i].Equals("Leave", StringComparison.OrdinalIgnoreCase))
+            if (incident.pageList.Count == 1)
             {
-                // 如果只有一个按钮且文本是"Leave"，则添加关闭Canvas并返回地图的事件监听器
-                btn.onClick.AddListener(CloseCanvasAndReturnToMap);
+                Debug.Log("只有一个按钮");
+                // 条件分支内的代码
+                if (incident.pageTextList[i].Equals("Leave", StringComparison.OrdinalIgnoreCase))
+                {
+                    // 如果只有一个按钮且文本是"Leave"，则添加关闭Canvas并返回地图的事件监听器
+                    btn.onClick.AddListener(CloseCanvasAndReturnToMap);
+                }
+                else if (incident.pageTextList[i].Equals("Battle", StringComparison.OrdinalIgnoreCase))
+                {
+                    // 如果只有一个按钮且文本是"Battle"，则添加加载"FirstScene"场景的事件监听器
+                    btn.onClick.AddListener(() => UnityEngine.SceneManagement.SceneManager.LoadScene("FirstScene"));
+                }
             }
             else
             {
+                Debug.Log("多个按钮");
                 int nextPageId = incident.pageList[i]; // 使用当前按钮对应的pageList中的值作为nextPageId
-                btn.onClick.AddListener(() => OnOptionSelected(nextPageId));
+                int localNextPageId = nextPageId; // 避免闭包问题
+                btn.interactable = true;
+                btn.onClick.AddListener(() =>
+                {
+                    Debug.Log($"按钮点击，下一页ID: {localNextPageId}");
+                    OnOptionSelected(localNextPageId);
+                });
             }
 
         }
@@ -89,8 +114,8 @@ public class IncidentManager : MonoBehaviour
 
     private void CloseCanvasAndReturnToMap()
     {
-        
-     incidentCanvas.enabled = false;
+
+        incidentCanvas.enabled = false;
 
         // 调用返回地图的方法
     }

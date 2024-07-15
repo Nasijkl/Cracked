@@ -53,9 +53,11 @@ public class CardClickHandler : MonoBehaviour, IPointerClickHandler
     private void SaveCrackedCardData(CrackedCardData cardData)
     {
         string path = "Assets/CrackedCards/" + cardData.name + ".asset";
+        #if UNITY_EDITOR
         AssetDatabase.CreateAsset(cardData, path);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
+        #endif
         SceneManager.LoadScene("Map");
     }
 }

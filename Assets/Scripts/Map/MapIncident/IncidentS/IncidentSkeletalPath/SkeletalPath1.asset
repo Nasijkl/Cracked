@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fa9d3e7b4c95ee4983dbe86139d57d2, type: 3}
+  m_Name: SkeletalPath1
+  m_EditorClassIdentifier: 
+  id: 0
+  text: You see a gloomy path with dense white bones on the roadside. Your intuition
+    tells you that this path may lead to an unknown treasure...
+  sprite: {fileID: 0}
+  pageList: 040000000500000006000000
+  pageTextList:
+  - Just go!
+  - Just go!
+  - "It\u2019s better being cautious.)"

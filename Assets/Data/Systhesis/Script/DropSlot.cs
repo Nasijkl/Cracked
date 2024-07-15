@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEditor;
-using UnityEditor.SearchService;
 using UnityEngine.SceneManagement;
 
 public class DropSlot : MonoBehaviour, IDropHandler
@@ -81,9 +80,11 @@ public class DropSlot : MonoBehaviour, IDropHandler
     private void SaveCrackedCardData(CrackedCardData cardData)
     {
         string path = "Assets/CrackedCards/" + cardData.name + ".asset";
+#if UNITY_EDITOR
         AssetDatabase.CreateAsset(cardData, path);
         AssetDatabase.SaveAssets();
         AssetDatabase.Refresh();
+#endif
         SceneManager.LoadScene("Map");
     }
 }

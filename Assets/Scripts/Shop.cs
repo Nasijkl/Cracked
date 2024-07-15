@@ -8,7 +8,7 @@ public class Shop : MonoBehaviour
 
 	[System.Serializable] public class ShopItem
 	{
-		public Sprite Image;
+		public CrackedCardData Data;
 		public int Price;
 		public bool IsPurchased = false;
 	}
@@ -26,11 +26,33 @@ public class Shop : MonoBehaviour
 
 	void Start ()
 	{
-		int len = ShopItemsList.Count;
+
+		GlobalDeckManager globalManager = FindObjectOfType<GlobalDeckManager>();
+
 		for (int i = 0; i < CardNumber; i++) {
-			RandomChoice = Random.Range(0, len);
+			int RandomChoice = Random.Range(0, ShopItemsList.Count);
 			g = Instantiate (ItemTemplate, ShopScrollView);
-			g.transform.GetChild (0).GetComponent <Image> ().sprite = ShopItemsList [RandomChoice].Image;
+			CardStore CardObject = g.transform.GetChild (0).GetComponent<CardStore>();
+            CardObject.piece = ShopItemsList[RandomChoice].Data;
+			Transform[] cardChildren = new Transform[g.transform.GetChild (0).childCount];
+            
+            for (int j = 0; j < g.transform.GetChild (0).childCount; j++)
+            {
+				Debug.Log(1);
+                cardChildren[j] = g.transform.GetChild (0).GetChild(j);
+            }
+			CrackedCardData cardData = ShopItemsList[RandomChoice].Data;
+			for (int j = 0; j < 4; j++)
+            {
+                Image fragmentImage = cardChildren[j].GetComponent<Image>();
+                fragmentImage.sprite = cardData.card_pieces[j].sprite;
+                
+                PieceStore pieceStore = cardChildren[j].GetComponent<PieceStore>();
+                if (pieceStore != null)
+                {
+                    pieceStore.piece = cardData.card_pieces[j];
+                }
+            }
 			g.transform.GetChild (1).GetChild (0).GetComponent <Text> ().text = ShopItemsList [RandomChoice].Price.ToString ();
 			buyBtn = g.transform.GetChild (2).GetComponent <Button> ();
 			buyBtn.interactable = !ShopItemsList[RandomChoice].IsPurchased;
@@ -43,6 +65,7 @@ public class Shop : MonoBehaviour
 	void OnShopItemBtnClicked (int itemIndex)
 	{
 		if (Game.Instance.HasEnoughCoins (ShopItemsList [itemIndex].Price)) {
+			GlobalDeckManager globalManager = FindObjectOfType<GlobalDeckManager>();
 			Game.Instance.UseCoins(ShopItemsList [itemIndex].Price);
 			//purchase Item
 			ShopItemsList [itemIndex].IsPurchased = true;
@@ -52,6 +75,7 @@ public class Shop : MonoBehaviour
 			buyBtn.interactable = false;
 			buyBtn.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "PURCHASED!";
 			SetCoinsUI();
+			globalManager.addCard(ShopItemsList [itemIndex].Data);
 		} else {
 			NoCoinsAnim.SetTrigger ("NoCoins");
 			Debug.Log ("You don't have enough coins!!");

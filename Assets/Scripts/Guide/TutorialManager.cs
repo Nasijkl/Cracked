@@ -3,6 +3,7 @@ using UnityEngine;
 public class TutorialManager : MonoBehaviour
 {
     private static TutorialManager _instance;
+    private const string TutorialCompletedKey = "TutorialCompleted"; // 新增：用于标记新手引导是否完成的键
 
     public static TutorialManager Instance
     {
@@ -40,7 +41,11 @@ public class TutorialManager : MonoBehaviour
 
     void Start()
     {
-        ShowStep(currentStep);
+        // 修改：在开始时检查新手引导是否已完成
+        if (PlayerPrefs.GetInt(TutorialCompletedKey, 0) == 0)
+        {
+            ShowStep(currentStep); // 只有当新手引导未完成时才显示
+        }
     }
 
     void ShowStep(int stepIndex)
@@ -67,5 +72,7 @@ public class TutorialManager : MonoBehaviour
     void EndTutorial()
     {
         // 结束新手引导逻辑
+        PlayerPrefs.SetInt(TutorialCompletedKey, 1); // 新增：标记新手引导为已完成
+        PlayerPrefs.Save(); // 确保更改被保存
     }
 }

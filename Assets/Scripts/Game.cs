@@ -10,6 +10,7 @@ public class Game : MonoBehaviour
 
 	void Awake ()
 	{
+		GlobalDeckManager globalManager = FindObjectOfType<GlobalDeckManager>();
 		if (Instance == null) {
 			Instance = this;
 			DontDestroyOnLoad (gameObject);

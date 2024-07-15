@@ -90,8 +90,19 @@ public class InfiniteMapGenerator : MonoBehaviour
 
         if (attempts < 10) // successfully found a valid position
         {
-            int randomIndex = Random.Range(0, mapTilePrefabs.Length); // generate a random index
-            GameObject selectedPrefab = mapTilePrefabs[randomIndex]; // select a prefab from the array
+            float chance = Random.Range(0f, 100f);
+            GameObject selectedPrefab;
+
+            if (chance < 30f) 
+            {
+                int randomIndex = Random.Range(mapTilePrefabs.Length - 5, mapTilePrefabs.Length);
+                selectedPrefab = mapTilePrefabs[randomIndex];
+            }
+            else
+            {
+                int randomIndex = Random.Range(0, mapTilePrefabs.Length - 5); 
+                selectedPrefab = mapTilePrefabs[randomIndex];
+            }
             GameObject newTile = Instantiate(selectedPrefab, newPosition, Quaternion.identity);
             mapTiles[tilePosition] = newTile;
             tilePositions.Add(newPosition); // Store the tile position
@@ -182,7 +193,25 @@ public class InfiniteMapGenerator : MonoBehaviour
 
     void HandleStamina()
     {
-        if (playerMovement.isMoving)
+        bool flag = playerMovement.isMoving;
+
+        // 假设Dialog是Canvas的名称，首先需要获取到这个Canvas对象
+        Canvas dialogCanvas = GameObject.Find("Dialog").GetComponent<Canvas>();
+
+        // 检查Dialog Canvas是否激活
+        if (dialogCanvas != null && dialogCanvas.enabled)
+        {
+            flag = false;
+        }
+        Canvas dialogCanvas1 = GameObject.Find("Incident").GetComponent<Canvas>();
+
+        // 检查Dialog Canvas是否激活
+        if (dialogCanvas1 != null && dialogCanvas1.enabled)
+        {
+            flag = false;
+        }
+
+        if (flag)
         {
             float staminaDecrease = staminaConsumptionRate * Time.deltaTime;
             stamina -= staminaDecrease;

@@ -50,7 +50,9 @@ public class EndBattlePopup : MonoBehaviour
 
     public void OnEndOfGameButtonPressed()
     {
+#if UNITY_EDITOR
         EditorApplication.isPlaying = false;
+#endif
     }
     
     
