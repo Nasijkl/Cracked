@@ -84,6 +84,7 @@ public class IncidentManager : MonoBehaviour
             if (incident.pageList.Count == 1)
             {
                 Debug.Log("只有一个按钮");
+                btn.interactable = true;
                 // 条件分支内的代码
                 if (incident.pageTextList[i].Equals("Leave", StringComparison.OrdinalIgnoreCase))
                 {
