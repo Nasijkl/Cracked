@@ -65,6 +65,9 @@ public class GameDriver : MonoBehaviour
 
     [SerializeField] private StatusVariable playerStatus;
 
+    private int player_load_flag = 0;
+    private int enemy_load_flag = 1;
+
     private void Start()
     {
         mainCamera = Camera.main;
@@ -73,8 +76,9 @@ public class GameDriver : MonoBehaviour
         // 设置鼠标图标
         SetCursorTexture();
 
-        CreatePlayer(playerTemplate);
         CreateEnemy(enemyTemplate);
+        CreatePlayer(playerTemplate);
+        
     }
 
     private void SetCursorTexture()
@@ -123,7 +127,12 @@ public class GameDriver : MonoBehaviour
             };
             obj.Character.Status.Value.Clear();
 
-            Initialize();
+            player_load_flag = 1;
+            if(enemy_load_flag == 1)
+            {
+                Initialize();
+            }
+            
         };
     }
 
@@ -155,6 +164,12 @@ public class GameDriver : MonoBehaviour
             };
 
             enemies.Add(enemy);
+
+            enemy_load_flag = 1;
+            if(player_load_flag == 1)
+            {
+                Initialize();
+            }
         };
     }
 

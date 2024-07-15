@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
+//using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class CardDisplay : MonoBehaviour
 {
-    public CardBank cardBank; // Ìí¼Ó¶ÔCardBankµÄÒýÓÃ
-    public Transform cardContainer; // ¿¨ÅÆÈÝÆ÷µÄÒýÓÃ
-    public float pieceSpacing = 2f; // ¿¨Æ¬Æ¬¶ÎÖ®¼äµÄ¼ä¸ô
+    public CardBank cardBank; // ï¿½ï¿½ï¿½Ó¶ï¿½CardBankï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public Transform cardContainer; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    public float pieceSpacing = 2f; // ï¿½ï¿½Æ¬Æ¬ï¿½ï¿½Ö®ï¿½ï¿½Ä¼ï¿½ï¿½
 
     void Start()
     {
@@ -24,10 +24,10 @@ public class CardDisplay : MonoBehaviour
             
             for (int i = 0; i < item.Amount; i++)
             {
-                // ÎªÃ¿ÕÅ¿¨ÅÆ´´½¨Ò»¸öÈÝÆ÷
+                // ÎªÃ¿ï¿½Å¿ï¿½ï¿½Æ´ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 string cardName = $"{item.Card.name}{i + 1}";
 
-                // ÎªÃ¿ÕÅ¿¨ÅÆ´´½¨Ò»¸öÈÝÆ÷£¬²¢Ê¹ÓÃ¹¹ÔìµÄÃû³Æ
+                // ÎªÃ¿ï¿½Å¿ï¿½ï¿½Æ´ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ã¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
                 GameObject cardObject = new GameObject(cardName);
                 cardObject.transform.SetParent(cardContainer, false);
                 cardObject.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
@@ -35,15 +35,15 @@ public class CardDisplay : MonoBehaviour
                 
                 for (int j = 0; j < item.Card.card_pieces.Length; j++)
                 {
-                    // ÎªÃ¿¸öCardPieceData´´½¨Ò»¸öSpriteRenderer
+                    // ÎªÃ¿ï¿½ï¿½CardPieceDataï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½SpriteRenderer
                     GameObject pieceObject = new GameObject($"Piece_{j}");
                     pieceObject.transform.SetParent(cardObject.transform, false);
                     SpriteRenderer pieceSprite = pieceObject.AddComponent<SpriteRenderer>();
                     pieceSprite.sprite = item.Card.card_pieces[j].sprite;
 
-                    // ¿ÉÑ¡£ºµ÷ÕûÃ¿¸öÆ¬¶ÎµÄÎ»ÖÃ
+                    // ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½Æ¬ï¿½Îµï¿½Î»ï¿½ï¿½
                     
-                    // ×¢Òâ£ºSpriteRenderer²»Ê¹ÓÃRectTransform£¬Òò´ËÎÒÃÇµ÷ÕûtransformµÄlocalPosition
+                    // ×¢ï¿½â£ºSpriteRendererï¿½ï¿½Ê¹ï¿½ï¿½RectTransformï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Çµï¿½ï¿½ï¿½transformï¿½ï¿½localPosition
                 }
                 cardObject.transform.localPosition = new Vector3((temp%5)*pieceSpacing, -snum* pieceSpacing, 0);
                 temp += 1;
